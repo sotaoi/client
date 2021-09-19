@@ -1,0 +1,7 @@
+/build/*
+!/build/.gitkeep
+/node_modules
+
+/deployment/*
+!/deployment/.gitkeep
+/tmp.deployment
