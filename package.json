@@ -15,7 +15,7 @@
     "clean:sclient": "node ./scripts/clean/clean-sclient"
   },
   "peerDependencies": {
-    "@sotaoi/config": "0.9.6",
+    "@sotaoi/config": "0.9.7",
     "@sotaoi/omni": "git+https://github.com/sotaoi/omni#0.9.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
@@ -25,7 +25,6 @@
   "devDependencies": {
     "@babel/runtime": "^7.8.4",
     "@sotaoi/client": "file:./",
-    "@sotaoi/config": "file:../sotaoi-config",
     "@sotaoi/omni": "file:../sotaoi-omni",
     "@types/lodash": "^4.14.171",
     "@types/node": "^14",

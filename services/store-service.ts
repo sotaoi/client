@@ -1,5 +1,5 @@
 import { Store } from '@sotaoi/omni/contracts/store';
-import { Lang, State, Seed, AppInfo } from '@sotaoi/omni/state';
+import { Lang, State, Seed, AppInfoInterface } from '@sotaoi/omni/state';
 import { AuthRecord } from '@sotaoi/omni/artifacts';
 import { StoreCreator } from '@sotaoi/omni/definitions/redux';
 import { BaseForm } from '@sotaoi/client/forms/form-classes/base-form';
@@ -33,7 +33,7 @@ class StoreService extends Store {
   protected accessToken: null | string;
 
   constructor(
-    appInfo: AppInfo,
+    appInfo: AppInfoInterface,
     apiUrl: string,
     createStore: StoreCreator,
     inputValidator: InputValidator,
@@ -175,7 +175,7 @@ class StoreService extends Store {
     return this.store.getState();
   }
 
-  public getAppInfo(): AppInfo {
+  public getAppInfo(): AppInfoInterface {
     return this.appInfo;
   }
 

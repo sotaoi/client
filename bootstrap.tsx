@@ -10,7 +10,7 @@ import { ControlPanelService } from '@sotaoi/client/services/control-panel-servi
 import { Helper } from '@sotaoi/client/helper';
 import { AppKernel } from '@sotaoi/client/app-kernel';
 import { store } from '@sotaoi/client/store';
-import { AppInfo } from '@sotaoi/omni/state';
+import { AppInfoInterface } from '@sotaoi/omni/state';
 import { socket } from '@sotaoi/client/socket';
 import { lang } from '@sotaoi/client/lang';
 import { LocalMemoryService } from '@sotaoi/client/services/local-memory-service';
@@ -29,7 +29,7 @@ import { AssetService } from '@sotaoi/client/services/asset-service';
 
 class Bootstrap {
   public static async init(
-    appInfo: AppInfo,
+    appInfo: AppInfoInterface,
     apiUrl: string,
     appKernel: AppKernel,
     routerComponentFn: () => React.ReactElement,
