@@ -1,4 +1,4 @@
-#!/bin/env node
+#!/usr/bin/env node
 
 const { buildSclientRoutine } = require('@sotaoi/client/scripts/routines/build-sclient-routine');
 
