@@ -122,15 +122,15 @@ class Bootstrap {
         try {
           ReactDom.render(<Loading />, document.getElementById('bootstrap'));
           await init();
-          // if (!!store().getState()['app.coreState.maintenance']) {
-          //   ReactDom.render(
-          //     <div style={{ display: 'flex', flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          //       Service is currently unavailable, we are currently undergoing maintenance operations
-          //     </div>,
-          //     document.getElementById('bootstrap'),
-          //   );
-          //   return;
-          // }
+          if (!!store().getState()['app.coreState.maintenance']) {
+            ReactDom.render(
+              <div style={{ display: 'flex', flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                Service is currently unavailable, we are currently undergoing maintenance operations
+              </div>,
+              document.getElementById('bootstrap'),
+            );
+            return;
+          }
           ReactDom.render(routerComponentFn(), document.getElementById('bootstrap'));
         } catch (err) {
           console.error(err);
