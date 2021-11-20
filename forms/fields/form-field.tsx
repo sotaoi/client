@@ -2,7 +2,7 @@ import React from 'react';
 import { BaseField, FieldInit } from '@sotaoi/client/forms/fields/base-field';
 import { BaseInput, FieldValidation } from '@sotaoi/omni/input/base-input';
 import { FormInput } from '@sotaoi/omni/input/form-input';
-import { InputValidator } from '@sotaoi/omni/contracts/input-validator';
+import { InputValidator } from '@sotaoi/omni/contracts/input-validator-contract';
 import { Helper } from '@sotaoi/client/helper';
 import { KeyboardType, TextInput } from 'react-native';
 

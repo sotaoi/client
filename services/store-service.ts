@@ -1,10 +1,10 @@
-import { Store } from '@sotaoi/omni/contracts/store';
+import { StoreContract } from '@sotaoi/omni/contracts/store-contract';
 import { Lang, State, Seed, AppInfoInterface } from '@sotaoi/omni/state';
 import { AuthRecord } from '@sotaoi/omni/artifacts';
 import { StoreCreator } from '@sotaoi/omni/definitions/redux';
 import { BaseForm } from '@sotaoi/client/forms/form-classes/base-form';
-import { LocalMemory } from '@sotaoi/omni/contracts/local-memory';
-import { InputValidator } from '@sotaoi/omni/contracts/input-validator';
+import { LocalMemory } from '@sotaoi/omni/contracts/local-memory-contract';
+import { InputValidator } from '@sotaoi/omni/contracts/input-validator-contract';
 import { Navigation } from '@sotaoi/client/router/navigation';
 import { Helper } from '@sotaoi/client/helper';
 
@@ -28,7 +28,7 @@ interface DefaultLangAction {
 }
 type Action = AppTitleAction | AuthRecordAction | SelectedLangAction | DefaultLangAction;
 
-class StoreService extends Store {
+class StoreService extends StoreContract {
   protected currentPath: null | string;
   protected accessToken: null | string;
 

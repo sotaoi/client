@@ -1,15 +1,15 @@
 import type { DefaultNamespace, Namespace, UseTranslationResponse } from 'react-i18next';
 import i18n, { Resource } from 'i18next';
 import { initReactI18next, useTranslation } from 'react-i18next';
-import { Store } from '@sotaoi/omni/contracts/store';
+import { StoreContract } from '@sotaoi/omni/contracts/store-contract';
 import { Lang } from '@sotaoi/omni/state';
-import { Lang as LangContract } from '@sotaoi/omni/contracts/lang';
+import { Lang as LangContract } from '@sotaoi/omni/contracts/lang-contract';
 
 class LangService extends LangContract {
   protected available: null | Lang[] = null;
   protected multilang = false;
 
-  public async init(store: () => Store): Promise<void> {
+  public async init(store: () => StoreContract): Promise<void> {
     const selectedLang = store().getSelectedLang();
     const defaultLang = store().getDefaultLang();
 

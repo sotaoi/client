@@ -3,7 +3,7 @@ import { BaseField, FieldInit } from '@sotaoi/client/forms/fields/base-field';
 import { RecordRef } from '@sotaoi/omni/artifacts';
 import { FieldValidation, BaseInput } from '@sotaoi/omni/input/base-input';
 import { RefSelectInput, RefSelectValue } from '@sotaoi/omni/input/ref-select-input';
-import { InputValidator } from '@sotaoi/omni/contracts/input-validator';
+import { InputValidator } from '@sotaoi/omni/contracts/input-validator-contract';
 import { Helper } from '@sotaoi/client/helper';
 // import { Picker } from 'react-native-picker/picker';
 

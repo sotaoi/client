@@ -1,6 +1,6 @@
 import { app } from '@sotaoi/client/app-kernel';
-import { Store } from '@sotaoi/omni/contracts/store';
+import { StoreContract } from '@sotaoi/omni/contracts/store-contract';
 
-const store = (): Store => app().get<Store>('app.system.store');
+const store = (): StoreContract => app().get<StoreContract>('app.system.store');
 
 export { store };

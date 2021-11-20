@@ -8,7 +8,7 @@ import { Store as ReduxStore } from 'redux';
 import { ErrorComponent } from '@sotaoi/client/services/control-panel-service/components/generic/error-component';
 import { InstallLayout } from '@sotaoi/client/services/control-panel-service/components/install-layout/install-layout';
 import { InstallForm } from '@sotaoi/client/services/control-panel-service/components/install-layout/forms/install-form';
-import { ControlPanel } from '@sotaoi/omni/contracts/control-panel';
+import { ControlPanel } from '@sotaoi/omni/contracts/control-panel-contract';
 import { store } from '@sotaoi/client/store';
 import { RouteComponent, ViewComponent } from '@sotaoi/client/components';
 

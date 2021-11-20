@@ -2,7 +2,7 @@ import React from 'react';
 import { BaseField, FieldInit } from '@sotaoi/client/forms/fields/base-field';
 import { FieldValidation, BaseInput } from '@sotaoi/omni/input/base-input';
 import { StringSelectInput, StringSelectValue } from '@sotaoi/omni/input/string-select-input';
-import { InputValidator } from '@sotaoi/omni/contracts/input-validator';
+import { InputValidator } from '@sotaoi/omni/contracts/input-validator-contract';
 import { Helper } from '@sotaoi/client/helper';
 // import { Picker } from 'react-native-picker/picker';
 

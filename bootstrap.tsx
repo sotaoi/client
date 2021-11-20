@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import { StoreCreator } from '@sotaoi/omni/definitions/redux';
-import { Store } from '@sotaoi/omni/contracts/store';
-import { LocalMemory } from '@sotaoi/omni/contracts/local-memory';
-import { Socket } from '@sotaoi/omni/contracts/socket';
+import { StoreContract } from '@sotaoi/omni/contracts/store-contract';
+import { LocalMemory } from '@sotaoi/omni/contracts/local-memory-contract';
+import { SocketContract } from '@sotaoi/omni/contracts/socket-contract';
 import { StoreService } from '@sotaoi/client/services/store-service';
 import { SocketService } from '@sotaoi/client/services/socket-service';
 import { ControlPanelService } from '@sotaoi/client/services/control-panel-service';
@@ -15,12 +15,12 @@ import { socket } from '@sotaoi/client/socket';
 import { lang } from '@sotaoi/client/lang';
 import { LocalMemoryService } from '@sotaoi/client/services/local-memory-service';
 import { InputValidatorService } from '@sotaoi/omni/services/input-validator-service';
-import { Logger } from '@sotaoi/omni/contracts/logger';
+import { Logger } from '@sotaoi/omni/contracts/logger-contract';
 import { LoggerService } from '@sotaoi/client/services/logger-service';
-import { Lang } from '@sotaoi/omni/contracts/lang';
+import { Lang } from '@sotaoi/omni/contracts/lang-contract';
 import { LangService } from '@sotaoi/client/services/lang-service';
-import { InputValidator } from '@sotaoi/omni/contracts/input-validator';
-import { Notification } from '@sotaoi/omni/contracts/notification';
+import { InputValidator } from '@sotaoi/omni/contracts/input-validator-contract';
+import { Notification } from '@sotaoi/omni/contracts/notification-contract';
 import { NotificationService } from '@sotaoi/client/services/notification-service';
 import { pushRoute } from '@sotaoi/client/router';
 import { BaseForm } from '@sotaoi/client/forms/form-classes/base-form';
@@ -70,7 +70,7 @@ class Bootstrap {
 
       // Store
       !app().has('app.system.store') &&
-        app().singleton<Store>('app.system.store', (): StoreService => {
+        app().singleton<StoreContract>('app.system.store', (): StoreService => {
           const inputValidator = app().get<InputValidator>('app.system.inputValidator');
           const localMemory = app().get<LocalMemory>('app.system.localMemory');
           return new StoreService(appInfo, apiUrl, createStore, inputValidator, localMemory);
@@ -78,7 +78,7 @@ class Bootstrap {
 
       // Socket
       !app().has('app.system.socket') &&
-        app().singleton<Socket>('app.system.socket', (): SocketService => {
+        app().singleton<SocketContract>('app.system.socket', (): SocketService => {
           return new SocketService();
         });
 

@@ -8,7 +8,7 @@ import { Action, Dispatch } from 'redux';
 import { ListenerEvent, ListenerEventType, RequestAbortHandlerAbstract } from '@sotaoi/omni/transactions';
 import { RecordRef } from '@sotaoi/omni/artifacts';
 import { socket } from '@sotaoi/client/socket';
-import { SocketListener } from '@sotaoi/omni/contracts/socket';
+import { SocketListener } from '@sotaoi/omni/contracts/socket-contract';
 import { pushRoute } from '@sotaoi/client/router';
 import { getPackage } from '@sotaoi/client/mpackages';
 import { Config } from '@sotaoi/config';

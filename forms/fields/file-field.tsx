@@ -2,7 +2,7 @@ import React from 'react';
 import { BaseField, FieldInit } from '@sotaoi/client/forms/fields/base-field';
 import { BaseInput, FieldValidation } from '@sotaoi/omni/input/base-input';
 import { FileInput, FileValue, FileFieldType } from '@sotaoi/omni/input/file-input';
-import { InputValidator } from '@sotaoi/omni/contracts/input-validator';
+import { InputValidator } from '@sotaoi/omni/contracts/input-validator-contract';
 import { Helper } from '@sotaoi/client/helper';
 
 type ComponentStateValue = null | File;

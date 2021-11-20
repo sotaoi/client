@@ -1,6 +1,6 @@
 import React from 'react';
 import { Helper } from '@sotaoi/client/helper';
-import { InputValidator } from '@sotaoi/omni/contracts/input-validator';
+import { InputValidator } from '@sotaoi/omni/contracts/input-validator-contract';
 import { BaseInput, FieldValidation } from '@sotaoi/omni/input/base-input';
 import type { CollectionField as CollectionFieldType } from '@sotaoi/client/forms/fields/collection-field';
 

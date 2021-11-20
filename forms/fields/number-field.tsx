@@ -2,7 +2,7 @@ import React from 'react';
 import { BaseField, FieldInit } from '@sotaoi/client/forms/fields/base-field';
 import { FieldValidation, BaseInput } from '@sotaoi/omni/input/base-input';
 import { NumberInput } from '@sotaoi/omni/input/number-input';
-import { InputValidator } from '@sotaoi/omni/contracts/input-validator';
+import { InputValidator } from '@sotaoi/omni/contracts/input-validator-contract';
 import { Helper } from '@sotaoi/client/helper';
 
 interface InputProps extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {

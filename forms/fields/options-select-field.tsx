@@ -2,7 +2,7 @@ import React from 'react';
 import { BaseField, FieldInit } from '@sotaoi/client/forms/fields/base-field';
 import { FieldValidation, BaseInput } from '@sotaoi/omni/input/base-input';
 import { OptionsSelectInput, OptionsSelectValue } from '@sotaoi/omni/input/options-select-input';
-import { InputValidator } from '@sotaoi/omni/contracts/input-validator';
+import { InputValidator } from '@sotaoi/omni/contracts/input-validator-contract';
 import { Helper } from '@sotaoi/client/helper';
 
 interface ComponentProps {

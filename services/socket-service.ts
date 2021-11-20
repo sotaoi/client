@@ -1,8 +1,8 @@
-import { Socket, SocketClass, SocketOptions } from '@sotaoi/omni/contracts/socket';
+import { SocketContract, SocketClass, SocketOptions } from '@sotaoi/omni/contracts/socket-contract';
 // @ts-ignore
 import { io } from 'socket.io/client-dist/socket.io';
 
-class SocketService extends Socket {
+class SocketService extends SocketContract {
   protected _io: null | SocketClass = null;
 
   public connect(url: string, options: SocketOptions): SocketClass {

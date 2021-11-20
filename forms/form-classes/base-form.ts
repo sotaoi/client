@@ -6,7 +6,7 @@ import { AuthRecord, Artifacts } from '@sotaoi/omni/artifacts';
 import { BaseInput, FormValidations } from '@sotaoi/omni/input/base-input';
 import { Helper } from '@sotaoi/client/helper';
 import { SingleCollectionConstructor, CollectionConstructor } from '@sotaoi/client/forms/fields/collection-field';
-import { InputValidator, InputValidationResult } from '@sotaoi/omni/contracts/input-validator';
+import { InputValidator, InputValidationResult } from '@sotaoi/omni/contracts/input-validator-contract';
 import _ from 'lodash';
 import { Action } from '@sotaoi/client/action';
 import { Output } from '@sotaoi/client/output';

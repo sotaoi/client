@@ -2,7 +2,7 @@ import { assignFields } from '@sotaoi/client/forms/fields/assign-fields';
 import { BaseField, FieldInit, FieldConstructor } from '@sotaoi/client/forms/fields/base-field';
 import { Helper } from '@sotaoi/client/helper';
 import { BaseForm } from '@sotaoi/client/forms/form-classes/base-form';
-import { InputValidator } from '@sotaoi/omni/contracts/input-validator';
+import { InputValidator } from '@sotaoi/omni/contracts/input-validator-contract';
 import { BaseInput } from '@sotaoi/omni/input/base-input';
 
 interface SingleCollectionConstructor {

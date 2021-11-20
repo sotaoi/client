@@ -1,6 +1,6 @@
 import { app } from '@sotaoi/client/app-kernel';
-import { Socket } from '@sotaoi/omni/contracts/socket';
+import { SocketContract } from '@sotaoi/omni/contracts/socket-contract';
 
-const socket = (): Socket => app().get<Socket>('app.system.socket');
+const socket = (): SocketContract => app().get<SocketContract>('app.system.socket');
 
 export { socket };
