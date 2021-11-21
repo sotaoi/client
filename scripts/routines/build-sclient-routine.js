@@ -34,7 +34,7 @@ const buildSclientRoutine = async (deploy) => {
 
   execSync('npx tsc', { cwd: path.resolve('./deployment'), stdio: 'inherit' });
   fs.unlinkSync(path.resolve('./deployment/tsconfig.json'));
-  execSync('npm run bootstrap:prod', { cwd: path.resolve('./deployment'), stdio: 'inherit' });
+  execSync('npm run bootstrap', { cwd: path.resolve('./deployment'), stdio: 'inherit' });
 
   Helper.iterateRecursiveSync(
     fs,
