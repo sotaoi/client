@@ -54,7 +54,7 @@ class StoreService extends StoreContract {
 
     const getSeed = async (): Promise<void> => {
       // seed = await(await fetch(`${this.apiUrl}/seed`, { method: 'GET' })).json();
-      seed = await (await fetch(`/seed`, { method: 'GET' })).json();
+      seed = await (await fetch(`/p-api/seed`, { method: 'GET' })).json();
     };
     while (!seed && getSeedTries < 15) {
       try {
