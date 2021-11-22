@@ -17,5 +17,5 @@
     "noEmitOnError": true,
     "jsx": "react"
   },
-  "exclude": ["./deployment", "./node_modules", "./scripts", "./tmp/deployment", "./var"]
+  "exclude": ["./deployment", "./node_modules", "./console", "./tmp/deployment", "./var"]
 }

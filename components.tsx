@@ -11,7 +11,6 @@ import { socket } from '@sotaoi/client/socket';
 import { SocketListener } from '@sotaoi/omni/contracts/socket-contract';
 import { pushRoute } from '@sotaoi/client/router';
 import { getPackage } from '@sotaoi/client/mpackages';
-import { Config } from '@sotaoi/config';
 
 const log = console.log;
 
@@ -420,13 +419,9 @@ class RequestAbortHandler extends RequestAbortHandlerAbstract {
 
 const GenericErrorComponent = (props: NoProps) => {
   log('no props:', props);
-  const appInfo = Config.getAppInfo();
 
-  if (!appInfo) {
-    throw new Error('Failed to get app info');
-  }
-
-  const domain = appInfo.proxyDomain;
+  // todo here: todo
+  const domain = '0.0.0.0';
 
   if (Helper.isWeb()) {
     return <img src={`https://${domain}/sotaoi/errors/error.svg`} style={{ margin: 10, width: 100, height: 100 }} />;
