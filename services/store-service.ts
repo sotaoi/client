@@ -53,7 +53,8 @@ class StoreService extends StoreContract {
     this.currentPath = (await this.localMemory.get('currentPath')) || '/';
 
     const getSeed = async (): Promise<void> => {
-      seed = await (await fetch(`${this.apiUrl}/seed`, { method: 'GET' })).json();
+      // seed = await(await fetch(`${this.apiUrl}/seed`, { method: 'GET' })).json();
+      seed = await (await fetch(`/seed`, { method: 'GET' })).json();
     };
     while (!seed && getSeedTries < 15) {
       try {
