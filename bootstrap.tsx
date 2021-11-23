@@ -110,9 +110,9 @@ class Bootstrap {
     Helper.setTitle(appInfo.name);
 
     const init = async (): Promise<void> => {
-      socket().connect(`https://${appInfo.streamingDomain}:${appInfo.streamingPort}`, {
-        transports: ['websocket'],
-      });
+      // socket().connect(`https://${appInfo.streamingDomain}:${appInfo.streamingPort}`, {
+      //   transports: ['websocket'],
+      // });
       await store().init();
       await lang().init(store);
     };
