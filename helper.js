@@ -1,7 +1,7 @@
-import { Helper as OmniHelper } from '@sotaoi/omni/helper';
+const OmniHelper = require('@sotaoi/omni/helper').Helper;
 
 class Helper extends OmniHelper {
-  public static setTitle(title: string): void {
+  static setTitle(title) {
     switch (true) {
       case this.isWeb():
         document.title = title;
@@ -17,7 +17,7 @@ class Helper extends OmniHelper {
     }
   }
 
-  public static uuid(): string {
+  static uuid() {
     let uuid = '',
       i,
       random;
@@ -31,20 +31,20 @@ class Helper extends OmniHelper {
     return uuid;
   }
 
-  public static isWeb(): boolean {
+  static isWeb() {
     return typeof document !== 'undefined';
   }
 
-  public static isMobile(): boolean {
+  static isMobile() {
     return typeof navigator !== 'undefined' && navigator.product === 'ReactNative';
   }
 
-  public static isElectron(): boolean {
+  static isElectron() {
     try {
       return (
         typeof navigator !== 'undefined' &&
         typeof navigator.userAgent !== 'undefined' &&
-        (navigator.userAgent as any).toLowerCase().indexOf(' electron/') > -1
+        navigator.userAgent.toLowerCase().indexOf(' electron/') > -1
       );
     } catch (err) {
       console.warn(err);
@@ -52,19 +52,19 @@ class Helper extends OmniHelper {
     }
   }
 
-  public static encodeSegment(segment: { [key: string]: any }): string {
-    const encodedSegment: string[] = [];
+  static encodeSegment(segment) {
+    const encodedSegment = [];
     Object.entries(segment).map(([key, value]) => {
       encodedSegment.push(`${key}=${encodeURIComponent(typeof value === 'string' ? value : JSON.stringify(value))}`);
     });
     return encodedSegment.join('&');
   }
 
-  public static decodeSegment(segment: string): { [key: string]: string } {
+  static decodeSegment(segment) {
     if (typeof segment !== 'string') {
       return {};
     }
-    const decodedSegment: { [key: string]: any } = {};
+    const decodedSegment = {};
     const segments = segment.split('&');
     segments.map((segment) => {
       const split = segment.split('=');
@@ -73,7 +73,7 @@ class Helper extends OmniHelper {
     return decodedSegment;
   }
 
-  public static asset(item: null | string | { [key: string]: any }, role = 'assets'): null | string {
+  static asset(item, role = 'assets') {
     item = typeof item === 'object' ? JSON.stringify(item) : item;
     if (!item) {
       return null;
@@ -89,5 +89,4 @@ class Helper extends OmniHelper {
   }
 }
 
-export { Helper };
-export type { TransformerFn } from '@sotaoi/omni/helper';
+module.exports = { Helper };

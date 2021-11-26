@@ -11,7 +11,7 @@ import { Helper } from '@sotaoi/client/helper';
 import { AppKernel } from '@sotaoi/client/app-kernel';
 import { store } from '@sotaoi/client/store';
 import { AppInfoInterface } from '@sotaoi/omni/state';
-import { socket } from '@sotaoi/client/socket';
+// import { socket } from '@sotaoi/client/socket';
 import { lang } from '@sotaoi/client/lang';
 import { LocalMemoryService } from '@sotaoi/client/services/local-memory-service';
 import { InputValidatorService } from '@sotaoi/omni/services/input-validator-service';
@@ -37,7 +37,7 @@ class Bootstrap {
     Loading: React.FunctionComponent,
     ErrorComponent: React.FunctionComponent<{ error: Error }>,
     formNotifications: boolean,
-    mpackages: { [key: string]: any },
+    mpackages: { [key: string]: any }
   ): Promise<void> {
     Object.entries(mpackages).map(([name, pkg]) => {
       setPackage(name, pkg);
@@ -52,7 +52,7 @@ class Bootstrap {
           return new InputValidatorService(
             {},
             () => null,
-            () => Promise.resolve([]),
+            () => Promise.resolve([])
           );
         });
 
@@ -127,7 +127,7 @@ class Bootstrap {
               <div style={{ display: 'flex', flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                 Service is currently unavailable, we are currently undergoing maintenance operations
               </div>,
-              document.getElementById('bootstrap'),
+              document.getElementById('bootstrap')
             );
             return;
           }

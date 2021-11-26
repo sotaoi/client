@@ -37,7 +37,7 @@ class StoreService extends StoreContract {
     apiUrl: string,
     createStore: StoreCreator,
     inputValidator: InputValidator,
-    localMemory: LocalMemory,
+    localMemory: LocalMemory
   ) {
     super(appInfo, apiUrl, createStore, inputValidator, localMemory);
     this.currentPath = null;
