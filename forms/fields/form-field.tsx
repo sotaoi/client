@@ -1,29 +1,33 @@
 import React from 'react';
 import { BaseField, FieldInit } from '@sotaoi/client/forms/fields/base-field';
-import { BaseInput, FieldValidation } from '@sotaoi/omni/input/base-input';
-import { FormInput } from '@sotaoi/omni/input/form-input';
-import { InputValidator } from '@sotaoi/omni/contracts/input-validator-contract';
-import { Helper } from '@sotaoi/client/helper';
-import { KeyboardType, TextInput } from 'react-native';
+import { BaseInput, FieldValidation } from '@sotaoi/input/base-input';
+import { FormInput } from '@sotaoi/input/form-input';
+import { InputValidator } from '@sotaoi/contracts/http/input-validator-contract';
 
-interface InputProps extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
-  onChange: (ev: any) => void;
+interface FormFieldHandler {
   value: any;
-  autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters';
-  keyboardType?: KeyboardType;
-  secureTextEntry?: boolean;
+  change: (value: any) => any;
+  pocket: { [key: string]: any };
+}
+
+interface FormFieldProps {
+  onChange: (ev: any) => void;
+  render: (handler: FormFieldHandler) => null | React.ReactElement;
+  pocket?: { [key: string]: any };
 }
 interface ComponentState {
   value: any;
 }
-class InputField<ComponentProps extends InputProps> extends BaseField<FormInput, ComponentProps, ComponentState> {
+class FormField<ComponentProps extends FormFieldProps> extends BaseField<FormInput, ComponentProps, ComponentState> {
+  public pocket: { [key: string]: any } = {};
+
   constructor(
     name: string,
     key: string,
     getFormValidation: () => InputValidator<(key: string) => void | null | BaseInput<any, any>>,
     validations: FieldValidation[],
     getRerender: () => (force: boolean) => void,
-    value: FormInput,
+    value: FormInput
   ) {
     super(name, key, getFormValidation, validations, getRerender, value);
   }
@@ -76,7 +80,7 @@ class InputField<ComponentProps extends InputProps> extends BaseField<FormInput,
   //
 
   public initialState(props: ComponentProps): ComponentState {
-    return { value: typeof props.value !== 'undefined' ? props.value : null };
+    return { value: this.value.value || null };
   }
 
   public setValue(input: FormInput, context: React.Component<ComponentProps, ComponentState>): void {
@@ -88,38 +92,26 @@ class InputField<ComponentProps extends InputProps> extends BaseField<FormInput,
   }
 
   public render(context: React.Component<ComponentProps, ComponentState>): null | React.ReactElement {
-    if (Helper.isWeb()) {
-      return <input {...context.props} value={context.state.value ?? ''} />;
-    }
-    if (Helper.isMobile()) {
-      const autoCapitalize = context.props.autoCapitalize || 'none';
-      const keyboardType = context.props.keyboardType || 'default';
-      const secureTextEntry = context.props.secureTextEntry || false;
-      const { onChange, ..._props } = context.props as any;
-      return (
-        <TextInput
-          autoCapitalize={autoCapitalize}
-          keyboardType={keyboardType}
-          secureTextEntry={secureTextEntry}
-          onChangeText={(value: any): void => onChange({ target: { value } })}
-          {...(_props as any)}
-          value={context.state.value}
-        />
-      );
-    }
-    if (Helper.isElectron()) {
-      throw new Error('electron is not implemented');
-    }
-    throw new Error('unknown environment in input component');
+    return context.props.render({
+      value: context.state.value,
+      change: (value) => {
+        this.value.value = value;
+        this.set(this.convert(this.value));
+        this.validate();
+        this.rerender(true);
+        context.props.onChange(value);
+      },
+      pocket: (context.props.pocket || {}) as any,
+    });
   }
 
   public static getDerivedStateFromProps(
     nextProps: { [key: string]: any },
-    state: { [key: string]: any },
+    state: { [key: string]: any }
   ): null | { [key: string]: any } {
     return { ...state, value: (nextProps as any).value || null };
   }
 }
 
-export { InputField };
-export { FormInput } from '@sotaoi/omni/input/form-input';
+export { FormField };
+export type { FormFieldHandler };

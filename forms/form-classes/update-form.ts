@@ -1,7 +1,7 @@
 import { CSSProperties } from 'react';
 import { getUpdateFormComponent } from '@sotaoi/client/forms/form-components/update-form-component';
 import { BaseForm } from '@sotaoi/client/forms/form-classes/base-form';
-import { AuthRecord, Artifacts } from '@sotaoi/omni/artifacts';
+import { AuthRecord, Artifacts } from '@sotaoi/contracts/artifacts';
 import { FormConstructor } from '@sotaoi/client/forms';
 
 class UpdateForm extends BaseForm {
@@ -17,7 +17,7 @@ class UpdateForm extends BaseForm {
     repository: string,
     fields: FormConstructor,
     uuid: string,
-    destroy: () => undefined,
+    destroy: () => undefined
   ) {
     super(formId, authRecord, artifacts, role, repository, fields, destroy);
     this.uuid = uuid;

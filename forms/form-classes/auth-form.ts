@@ -1,7 +1,7 @@
 import { CSSProperties } from 'react';
 import { getAuthFormComponent } from '@sotaoi/client/forms/form-components/auth-form-component';
 import { BaseForm } from '@sotaoi/client/forms/form-classes/base-form';
-import { Artifacts } from '@sotaoi/omni/artifacts';
+import { Artifacts } from '@sotaoi/contracts/artifacts';
 import { FormConstructor } from '@sotaoi/client/forms';
 
 class AuthForm extends BaseForm {
@@ -15,7 +15,7 @@ class AuthForm extends BaseForm {
     repository: string,
     fields: FormConstructor,
     strategy: string,
-    destroy: () => undefined,
+    destroy: () => undefined
   ) {
     super(formId, null, artifacts, null, repository, fields, destroy);
     this.strategy = strategy;

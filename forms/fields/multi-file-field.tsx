@@ -1,9 +1,9 @@
 import React from 'react';
 import { BaseField, FieldInit } from '@sotaoi/client/forms/fields/base-field';
-import { FieldValidation, BaseInput } from '@sotaoi/omni/input/base-input';
-import { MultiFileInput, MultiFileFieldType } from '@sotaoi/omni/input/multi-file-input';
-import { FileInput, StoredItem } from '@sotaoi/omni/input/file-input';
-import { InputValidator } from '@sotaoi/omni/contracts/input-validator-contract';
+import { FieldValidation, BaseInput } from '@sotaoi/input/base-input';
+import { MultiFileInput, MultiFileFieldType } from '@sotaoi/input/multi-file-input';
+import { FileInput, StoredItem } from '@sotaoi/input/file-input';
+import { InputValidator } from '@sotaoi/contracts/http/input-validator-contract';
 import { Helper } from '@sotaoi/client/helper';
 
 interface ComponentProps
@@ -22,7 +22,7 @@ class MultiFileField extends BaseField<MultiFileInput, ComponentProps, Component
     getFormValidation: () => InputValidator<(key: string) => void | null | BaseInput<any, any>>,
     validations: FieldValidation[],
     getRerender: () => (force: boolean) => void,
-    value: MultiFileInput,
+    value: MultiFileInput
   ) {
     super(name, key, getFormValidation, validations, getRerender, value);
     this.ref = null;
@@ -138,7 +138,7 @@ class MultiFileField extends BaseField<MultiFileInput, ComponentProps, Component
 
   public static getDerivedStateFromProps(
     nextProps: { [key: string]: any },
-    state: { [key: string]: any },
+    state: { [key: string]: any }
   ): null | { [key: string]: any } {
     return { ...state, value: (nextProps as any).value };
   }

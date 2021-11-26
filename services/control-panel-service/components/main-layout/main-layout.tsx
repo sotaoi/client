@@ -1,5 +1,5 @@
 import React from 'react';
-import { LayoutProps } from '@sotaoi/omni/state';
+import { LayoutProps } from '@sotaoi/contracts/state';
 
 const MainLayout = (props: LayoutProps): null | React.ReactElement => (
   <div style={{ margin: 10 }}>

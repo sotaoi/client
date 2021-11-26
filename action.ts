@@ -9,14 +9,14 @@ import {
   PlistFilters,
   SlistFilters,
   ActionConclusion,
-} from '@sotaoi/omni/transactions';
-import { Output } from '@sotaoi/omni/output';
-import { Artifacts } from '@sotaoi/omni/artifacts';
+} from '@sotaoi/contracts/transactions';
+import { Output } from '@sotaoi/client/output';
+import { Artifacts } from '@sotaoi/contracts/artifacts';
 import { RequestAbortHandler } from '@sotaoi/client/components';
 import { store } from '@sotaoi/client/store';
 import { logger } from '@sotaoi/client/logger';
 import { notification } from '@sotaoi/client/notification';
-import { ErrorCode } from '@sotaoi/omni/errors';
+import { ErrorCode } from '@sotaoi/contracts/errors';
 
 class Action {
   public static async store(
@@ -24,7 +24,7 @@ class Action {
     artifacts: Artifacts,
     role: null | string,
     repository: string,
-    payload: Payload,
+    payload: Payload
   ): Promise<ActionConclusion> {
     try {
       const apiUrl = store().getApiUrl();
@@ -33,11 +33,11 @@ class Action {
       formData.append('role', role || '');
       formData.append('repository', repository || '');
       return notification().conclusion(
-        Output.parseCommand(await (await fetch(apiUrl + '/store', { method: 'POST', body: formData })).json()),
+        Output.parseCommand(await (await fetch(apiUrl + '/store', { method: 'POST', body: formData })).json())
       );
     } catch (err) {
       return notification().conclusion(
-        new CommandResult(400, ErrorCode.APP_GENERIC_ERROR, 'Error', 'Something went wrong', null, null, {}),
+        new CommandResult(400, ErrorCode.APP_GENERIC_ERROR, 'Error', 'Something went wrong', null, null, {})
       );
     }
   }
@@ -48,7 +48,7 @@ class Action {
     role: null | string,
     repository: string,
     uuid: string,
-    payload: Payload,
+    payload: Payload
   ): Promise<ActionConclusion> {
     try {
       const apiUrl = store().getApiUrl();
@@ -58,11 +58,11 @@ class Action {
       formData.append('repository', repository || '');
       formData.append('uuid', uuid || '');
       return notification().conclusion(
-        Output.parseCommand(await (await fetch(apiUrl + '/update', { method: 'POST', body: formData })).json()),
+        Output.parseCommand(await (await fetch(apiUrl + '/update', { method: 'POST', body: formData })).json())
       );
     } catch (err) {
       return notification().conclusion(
-        new CommandResult(400, ErrorCode.APP_GENERIC_ERROR, 'Error', 'Something went wrong', null, null, {}),
+        new CommandResult(400, ErrorCode.APP_GENERIC_ERROR, 'Error', 'Something went wrong', null, null, {})
       );
     }
   }
@@ -74,7 +74,7 @@ class Action {
     list: string,
     filters: null | FlistFilters,
     variant: null | string,
-    requestAbortHandler: RequestAbortHandler,
+    requestAbortHandler: RequestAbortHandler
   ): Promise<QueryResult> {
     try {
       const apiUrl = store().getApiUrl();
@@ -102,7 +102,7 @@ class Action {
     repository: string,
     list: string,
     filters: null | PlistFilters,
-    requestAbortHandler: RequestAbortHandler,
+    requestAbortHandler: RequestAbortHandler
   ): Promise<QueryResult> {
     // nothing here yet
     return new QueryResult(400, ErrorCode.APP_GENERIC_ERROR, 'Error', 'Something went wrong', null, null, {});
@@ -114,7 +114,7 @@ class Action {
     repository: string,
     list: string,
     filters: null | SlistFilters,
-    requestAbortHandler: RequestAbortHandler,
+    requestAbortHandler: RequestAbortHandler
   ): Promise<QueryResult> {
     // nothing here yet
     return new QueryResult(400, ErrorCode.APP_GENERIC_ERROR, 'Error', 'Something went wrong', null, null, {});
@@ -126,7 +126,7 @@ class Action {
     repository: string,
     uuid: string,
     variant: null | string,
-    requestAbortHandler: RequestAbortHandler,
+    requestAbortHandler: RequestAbortHandler
   ): Promise<RetrieveResult> {
     try {
       const apiUrl = store().getApiUrl();
@@ -152,7 +152,7 @@ class Action {
     accessToken: null | string,
     role: null | string,
     repository: string,
-    uuid: string,
+    uuid: string
   ): Promise<ActionConclusion> {
     try {
       const apiUrl = store().getApiUrl();
@@ -162,12 +162,12 @@ class Action {
       formData.append('repository', repository);
       formData.append('uuid', uuid);
       return notification().conclusion(
-        Output.parseCommand(await (await fetch(apiUrl + '/remove', { method: 'POST', body: formData })).json()),
+        Output.parseCommand(await (await fetch(apiUrl + '/remove', { method: 'POST', body: formData })).json())
       );
     } catch (err) {
       logger().estack(err);
       return notification().conclusion(
-        new CommandResult(400, ErrorCode.APP_GENERIC_ERROR, 'Error', 'Something went wrong', null, null, {}),
+        new CommandResult(400, ErrorCode.APP_GENERIC_ERROR, 'Error', 'Something went wrong', null, null, {})
       );
     }
   }
@@ -176,7 +176,7 @@ class Action {
     artifacts: Artifacts,
     repository: string,
     strategy: string,
-    payload: Payload,
+    payload: Payload
   ): Promise<ActionConclusion> {
     try {
       const apiUrl = store().getApiUrl();
@@ -184,11 +184,11 @@ class Action {
       formData.append('repository', repository);
       formData.append('strategy', strategy);
       return notification().conclusion(
-        Output.parseAuth(await (await fetch(apiUrl + '/auth', { method: 'POST', body: formData })).json()),
+        Output.parseAuth(await (await fetch(apiUrl + '/auth', { method: 'POST', body: formData })).json())
       );
     } catch (err) {
       return notification().conclusion(
-        new AuthResult(400, ErrorCode.APP_GENERIC_ERROR, 'Error', 'Something went wrong', null, null, null, {}),
+        new AuthResult(400, ErrorCode.APP_GENERIC_ERROR, 'Error', 'Something went wrong', null, null, null, {})
       );
     }
   }
@@ -205,7 +205,7 @@ class Action {
     role: null | string,
     repository: string,
     task: string,
-    payload: Payload,
+    payload: Payload
   ): Promise<ActionConclusion> {
     try {
       const apiUrl = store().getApiUrl();
@@ -215,11 +215,11 @@ class Action {
       formData.append('repository', repository || '');
       formData.append('task', task || '');
       return notification().conclusion(
-        Output.parseTask(await (await fetch(apiUrl + '/task', { method: 'POST', body: formData })).json()),
+        Output.parseTask(await (await fetch(apiUrl + '/task', { method: 'POST', body: formData })).json())
       );
     } catch (err) {
       return notification().conclusion(
-        new TaskResult(400, ErrorCode.APP_GENERIC_ERROR, 'Error', 'Something went wrong', null, null, {}),
+        new TaskResult(400, ErrorCode.APP_GENERIC_ERROR, 'Error', 'Something went wrong', null, null, {})
       );
     }
   }

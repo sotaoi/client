@@ -1,5 +1,5 @@
 import React from 'react';
-import { Errors } from '@sotaoi/omni/errors';
+import { Errors } from '@sotaoi/contracts/errors';
 import { Helper } from '@sotaoi/client/helper';
 import { View, Text } from 'react-native';
 

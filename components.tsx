@@ -1,16 +1,17 @@
 import type { SvgCssUri as SvgCssUriType } from '@sotaoi/client/definitions/react-native-svg';
 import React from 'react';
 import { Navigation } from '@sotaoi/client/router/navigation';
-import { State } from '@sotaoi/omni/state';
+import { State } from '@sotaoi/contracts/state';
 import { Helper } from '@sotaoi/client/helper';
 import { store } from '@sotaoi/client/store';
 import { Action, Dispatch } from 'redux';
-import { ListenerEvent, ListenerEventType, RequestAbortHandlerAbstract } from '@sotaoi/omni/transactions';
-import { RecordRef } from '@sotaoi/omni/artifacts';
+import { ListenerEvent, ListenerEventType, RequestAbortHandlerAbstract } from '@sotaoi/contracts/transactions';
+import { RecordRef } from '@sotaoi/contracts/artifacts';
 import { socket } from '@sotaoi/client/socket';
-import { SocketListener } from '@sotaoi/omni/contracts/socket-contract';
+import { SocketListener } from '@sotaoi/contracts/http/socket-contract';
 import { pushRoute } from '@sotaoi/client/router';
 import { getPackage } from '@sotaoi/client/mpackages';
+import { asset } from '@sotaoi/input/helper';
 
 const log = console.log;
 
@@ -41,7 +42,7 @@ abstract class RouteComponent<ComponentProps> extends React.Component<ComponentP
         this.component = (data: RouteData<ComponentProps>): null | React.ReactElement => {
           try {
             return this.web(data);
-          } catch (err) {
+          } catch (err: any) {
             const Component = this.errorComponent;
             return <Component error={err} />;
           }
@@ -51,7 +52,7 @@ abstract class RouteComponent<ComponentProps> extends React.Component<ComponentP
         this.component = (data: RouteData<ComponentProps>): null | React.ReactElement => {
           try {
             return this.mobile(data);
-          } catch (err) {
+          } catch (err: any) {
             const Component = this.errorComponent;
             return <Component error={err} />;
           }
@@ -61,7 +62,7 @@ abstract class RouteComponent<ComponentProps> extends React.Component<ComponentP
         this.component = (data: RouteData<ComponentProps>): null | React.ReactElement => {
           try {
             return this.electron(data);
-          } catch (err) {
+          } catch (err: any) {
             const Component = this.errorComponent;
             return <Component error={err} />;
           }
@@ -78,7 +79,7 @@ abstract class RouteComponent<ComponentProps> extends React.Component<ComponentP
       | { prototype: ViewComponent<ViewComponentProps> }
       | React.Component<ViewComponentProps>
       | React.FunctionComponent<ViewComponentProps>,
-    props: ViewComponentProps,
+    props: ViewComponentProps
   ): null | React.ReactElement {
     if (!extendedView) {
       return null;
@@ -96,10 +97,10 @@ abstract class RouteComponent<ComponentProps> extends React.Component<ComponentP
   }
 
   public asset(item: null | string, role = 'assets'): null | string {
-    return Helper.asset(item, role);
+    return asset(item, role);
   }
   public assets(items: null | string, role = 'assets'): null | string[] {
-    return (items && JSON.parse(items).map((item: string) => Helper.asset(item, role))) || null;
+    return (items && JSON.parse(items).map((item: string) => asset(item, role))) || null;
   }
 
   public readonly render = (): null | React.ReactElement => {
@@ -127,7 +128,7 @@ abstract class RouteCpComponent<RouteCpComponentProps> extends RouteComponent<Ro
 interface ViewData<
   ComponentProps,
   MappedState extends { [key: string]: any } = { [key: string]: any },
-  DispatchProps extends Action = { type: string; value: any },
+  DispatchProps extends Action = { type: string; value: any }
 > {
   results: { [key: string]: any };
   props: ComponentProps;
@@ -147,7 +148,7 @@ abstract class ViewComponent<
   ComponentProps extends { [key: string]: any },
   State extends { [key: string]: any } = { [key: string]: any },
   MappedState extends { [key: string]: any } = { [key: string]: any },
-  DispatchProps extends Action = { type: string; value: any },
+  DispatchProps extends Action = { type: string; value: any }
 > extends React.Component<ComponentProps> {
   abstract promises(props: ComponentProps): ViewPromises<ComponentProps>;
 
@@ -187,7 +188,7 @@ abstract class ViewComponent<
         this.component = (data: ViewData<ComponentProps, MappedState, DispatchProps>): null | React.ReactElement => {
           try {
             return this.web(data);
-          } catch (err) {
+          } catch (err: any) {
             const Component = this.errorComponent;
             return <Component error={err} />;
           }
@@ -197,7 +198,7 @@ abstract class ViewComponent<
         this.component = (data: ViewData<ComponentProps, MappedState, DispatchProps>): null | React.ReactElement => {
           try {
             return this.mobile(data);
-          } catch (err) {
+          } catch (err: any) {
             const Component = this.errorComponent;
             return <Component error={err} />;
           }
@@ -207,7 +208,7 @@ abstract class ViewComponent<
         this.component = (data: ViewData<ComponentProps, MappedState, DispatchProps>): null | React.ReactElement => {
           try {
             return this.electron(data);
-          } catch (err) {
+          } catch (err: any) {
             const Component = this.errorComponent;
             return <Component error={err} />;
           }
@@ -229,15 +230,15 @@ abstract class ViewComponent<
   }
 
   public asset(item: null | string, role = 'assets'): null | string {
-    return Helper.asset(item, role);
+    return asset(item, role);
   }
   public assets(items: null | string, role = 'assets'): null | string[] {
-    return (items && JSON.parse(items).map((item: string) => Helper.asset(item, role))) || null;
+    return (items && JSON.parse(items).map((item: string) => asset(item, role))) || null;
   }
 
   public mapStateToProps(
     state: State,
-    props: Omit<ViewData<ComponentProps, MappedState, DispatchProps>, 'dispatch'>,
+    props: Omit<ViewData<ComponentProps, MappedState, DispatchProps>, 'dispatch'>
   ): MappedState {
     return state as any;
   }
@@ -265,7 +266,7 @@ abstract class ViewComponent<
   public readonly componentDidUpdate = (
     prevProps: Readonly<ComponentProps>,
     prevState: Readonly<ViewState>,
-    snapshot: any,
+    snapshot: any
   ): void => {
     if (Object.keys(prevProps).length !== Object.keys(this.props).length) {
       this.parsePromises(this.promises(this.props), this.props, this.state).then((state) => this.updateState(state));
@@ -302,7 +303,7 @@ abstract class ViewComponent<
       const Connect = connect(
         (state: State, props: Omit<ViewData<ComponentProps, MappedState, DispatchProps>, 'dispatch'>) => ({
           state: this.mapStateToProps(state, props),
-        }),
+        })
       )((props: Omit<ViewData<ComponentProps, MappedState, DispatchProps>, 'dispatch'>) => {
         return (
           <Component
@@ -337,7 +338,7 @@ abstract class ViewComponent<
           });
           this.parseRefreshers();
         })
-        .catch((err) => {
+        .catch((err: any) => {
           console.error(err);
         })
         .finally(() => {
@@ -370,7 +371,7 @@ abstract class ViewComponent<
             state.results[key] = res;
             this.updateState(state);
           })
-          .catch((err) => {
+          .catch((err: any) => {
             console.error(err);
           })
           .finally(() => {

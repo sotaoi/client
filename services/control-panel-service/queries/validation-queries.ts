@@ -1,5 +1,5 @@
 import { RequestAbortHandler } from '@sotaoi/client/components';
-import { FormValidations } from '@sotaoi/omni/input/base-input';
+import { FormValidations } from '@sotaoi/input/base-input';
 import { controlPanelForms } from '@sotaoi/client/forms/control-panel-forms';
 
 const getMaintainerFormValidations = () => {

@@ -1,7 +1,8 @@
 import React from 'react';
 import { Helper } from '@sotaoi/client/helper';
-import { InputValidator } from '@sotaoi/omni/contracts/input-validator-contract';
-import { BaseInput, FieldValidation } from '@sotaoi/omni/input/base-input';
+import { InputValidator } from '@sotaoi/contracts/http/input-validator-contract';
+import { BaseInput, FieldValidation } from '@sotaoi/input/base-input';
+import { asset } from '@sotaoi/input/helper';
 import type { CollectionField as CollectionFieldType } from '@sotaoi/client/forms/fields/collection-field';
 
 interface FieldConstructor {
@@ -60,7 +61,7 @@ abstract class BaseField<ValueType, ComponentProps = any, ComponentState = any> 
     getFormValidation: () => InputValidator<(key: string) => void | null | BaseInput<any, any>>,
     validations: null | FieldValidation[],
     getRerender: () => (force: boolean) => void,
-    value: ValueType,
+    value: ValueType
   ) {
     this.renderUuid = Helper.uuid();
     this.name = name;
@@ -104,10 +105,10 @@ abstract class BaseField<ValueType, ComponentProps = any, ComponentState = any> 
   }
 
   public asset(item: null | string, role = 'assets'): null | string {
-    return Helper.asset(item, role);
+    return asset(item, role);
   }
   public assets(items: null | string, role = 'assets'): null | string[] {
-    return (items && JSON.parse(items).map((item: string) => Helper.asset(item, role))) || null;
+    return (items && JSON.parse(items).map((item: string) => asset(item, role))) || null;
   }
 
   public getKey(index: number): string {
@@ -170,7 +171,7 @@ abstract class BaseField<ValueType, ComponentProps = any, ComponentState = any> 
       () => ({}),
       [],
       () => ({}),
-      null,
+      null
     );
     return instance.convert(value).input(instance.constructor);
   }

@@ -1,8 +1,8 @@
 import React from 'react';
 import { BaseField, FieldInit } from '@sotaoi/client/forms/fields/base-field';
-import { FieldValidation, BaseInput } from '@sotaoi/omni/input/base-input';
-import { NumberInput } from '@sotaoi/omni/input/number-input';
-import { InputValidator } from '@sotaoi/omni/contracts/input-validator-contract';
+import { FieldValidation, BaseInput } from '@sotaoi/input/base-input';
+import { NumberInput } from '@sotaoi/input/number-input';
+import { InputValidator } from '@sotaoi/contracts/http/input-validator-contract';
 import { Helper } from '@sotaoi/client/helper';
 
 interface InputProps extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
@@ -20,7 +20,7 @@ class NumberField<ComponentProps = InputProps> extends BaseField<NumberInput, Co
     getFormValidation: () => InputValidator<(key: string) => void | null | BaseInput<any, any>>,
     validations: FieldValidation[],
     getRerender: () => (force: boolean) => void,
-    value: NumberInput,
+    value: NumberInput
   ) {
     super(name, key, getFormValidation, validations, getRerender, value);
   }
@@ -112,7 +112,7 @@ class NumberField<ComponentProps = InputProps> extends BaseField<NumberInput, Co
 
   public static getDerivedStateFromProps(
     nextProps: { [key: string]: any },
-    state: { [key: string]: any },
+    state: { [key: string]: any }
   ): null | { [key: string]: any } {
     return { ...state, value: (nextProps as any).value };
   }

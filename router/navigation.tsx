@@ -1,6 +1,6 @@
 import React from 'react';
-import { LayoutProps, RenderComponent, RouterConfig } from '@sotaoi/omni/state';
-import { Errors } from '@sotaoi/omni/errors';
+import { LayoutProps, RenderComponent, RouterConfig } from '@sotaoi/contracts/state';
+import { Errors } from '@sotaoi/contracts/errors';
 import { RouterEvents } from '@sotaoi/client/router/router-events';
 import { RouteChange } from '@sotaoi/client/router/route-change';
 import { Helper } from '@sotaoi/client/helper';
@@ -52,7 +52,7 @@ class Navigation {
     reactRedux: any,
     reduxStore?: ReduxStore<any, any>,
     // reduxProviderContext?: React.Context<ReactReduxContextValue>,
-    reduxProviderContext?: React.Context<any>,
+    reduxProviderContext?: React.Context<any>
   ): void {
     this.config = config;
     this.extendedComponents = extendedComponents;
@@ -87,7 +87,7 @@ class Navigation {
   public static getRoutes(
     currentPath: string,
     config: RouterConfig,
-    errorComponent: React.FunctionComponent<{ error: Error }>,
+    errorComponent: React.FunctionComponent<{ error: Error }>
   ): Routes {
     RouterData.config = config;
     RouterData.errorComponent = errorComponent;

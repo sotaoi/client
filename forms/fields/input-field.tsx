@@ -1,8 +1,8 @@
 import React from 'react';
 import { BaseField, FieldInit } from '@sotaoi/client/forms/fields/base-field';
-import { BaseInput, FieldValidation } from '@sotaoi/omni/input/base-input';
-import { StringInput } from '@sotaoi/omni/input/string-input';
-import { InputValidator } from '@sotaoi/omni/contracts/input-validator-contract';
+import { BaseInput, FieldValidation } from '@sotaoi/input/base-input';
+import { StringInput } from '@sotaoi/input/string-input';
+import { InputValidator } from '@sotaoi/contracts/http/input-validator-contract';
 import { Helper } from '@sotaoi/client/helper';
 import { KeyboardType, TextInput } from 'react-native';
 
@@ -23,7 +23,7 @@ class InputField<ComponentProps extends InputProps> extends BaseField<StringInpu
     getFormValidation: () => InputValidator<(key: string) => void | null | BaseInput<any, any>>,
     validations: FieldValidation[],
     getRerender: () => (force: boolean) => void,
-    value: StringInput,
+    value: StringInput
   ) {
     super(name, key, getFormValidation, validations, getRerender, value);
   }
@@ -115,11 +115,11 @@ class InputField<ComponentProps extends InputProps> extends BaseField<StringInpu
 
   public static getDerivedStateFromProps(
     nextProps: { [key: string]: any },
-    state: { [key: string]: any },
+    state: { [key: string]: any }
   ): null | { [key: string]: any } {
     return { ...state, value: (nextProps as any).value || null };
   }
 }
 
 export { InputField };
-export { StringInput } from '@sotaoi/omni/input/string-input';
+export { StringInput } from '@sotaoi/input/string-input';
