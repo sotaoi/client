@@ -23,6 +23,9 @@ const main = async () => {
     .command('clean:sclient', null, null, () => {
       execSync(`node ./console/commands/clean/clean-sclient`, { cwd: path.resolve('./'), stdio: 'inherit' });
     })
+    .command('build:sclient', null, null, () => {
+      execSync(`node ./console/commands/build/build-sclient`, { cwd: path.resolve('./'), stdio: 'inherit' });
+    })
     .command('deploy:sclient', null, null, () => {
       execSync(`node ./console/commands/deploy/deploy-sclient`, { cwd: path.resolve('./'), stdio: 'inherit' });
     })
