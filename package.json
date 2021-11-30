@@ -1,16 +1,16 @@
 {
   "name": "@sotaoi/client",
   "private": false,
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "engines": {
     "node": "14.x"
   },
   "peerDependencies": {
     "@sotaoi/config": "0.9.7",
-    "@sotaoi/contracts": "git+https://github.com/sotaoi/contracts#master",
-    "@sotaoi/forms": "git+https://github.com/sotaoi/forms#master",
-    "@sotaoi/input": "git+https://github.com/sotaoi/input#master",
+    "@sotaoi/contracts": "1.0.0",
+    "@sotaoi/forms": "1.0.0",
+    "@sotaoi/input": "1.0.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "^0.63.4",
@@ -19,9 +19,9 @@
   "devDependencies": {
     "@babel/runtime": "^7.8.4",
     "@sotaoi/client": "file:./",
-    "@sotaoi/contracts": "git+https://github.com/sotaoi/contracts#master",
-    "@sotaoi/forms": "git+https://github.com/sotaoi/forms#master",
-    "@sotaoi/input": "git+https://github.com/sotaoi/input#master",
+    "@sotaoi/contracts": "1.0.0",
+    "@sotaoi/forms": "1.0.0",
+    "@sotaoi/input": "1.0.0",
     "@sotaoi/signal": "1.0.5",
     "@types/lodash": "^4.14.171",
     "@types/node": "^14",
