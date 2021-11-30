@@ -1,6 +1,6 @@
 import React from 'react';
-import { RoutesConfig } from '@sotaoi/omni/state';
-import { ControlPanel } from '@sotaoi/omni/contracts/control-panel-contract';
+import { RoutesConfig } from '@sotaoi/contracts/state';
+import { ControlPanel } from '@sotaoi/contracts/http/control-panel-contract';
 import { Helper } from '@sotaoi/client/helper';
 import { store } from '@sotaoi/client/store';
 import { GateLayout } from '@sotaoi/client/services/control-panel-service/components/gate-layout/gate-layout';

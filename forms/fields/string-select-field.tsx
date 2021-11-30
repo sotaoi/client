@@ -1,8 +1,8 @@
 import React from 'react';
 import { BaseField, FieldInit } from '@sotaoi/client/forms/fields/base-field';
-import { FieldValidation, BaseInput } from '@sotaoi/omni/input/base-input';
-import { StringSelectInput, StringSelectValue } from '@sotaoi/omni/input/string-select-input';
-import { InputValidator } from '@sotaoi/omni/contracts/input-validator-contract';
+import { FieldValidation, BaseInput } from '@sotaoi/input/base-input';
+import { StringSelectInput, StringSelectValue } from '@sotaoi/input/string-select-input';
+import { InputValidator } from '@sotaoi/contracts/http/input-validator-contract';
 import { Helper } from '@sotaoi/client/helper';
 // import { Picker } from 'react-native-picker/picker';
 
@@ -26,7 +26,7 @@ class StringSelectField extends BaseField<StringSelectInput, ComponentProps, Com
     getFormValidation: () => InputValidator<(key: string) => void | null | BaseInput<any, any>>,
     validations: FieldValidation[] = [],
     getRerender: () => (force: boolean) => void,
-    value: StringSelectInput,
+    value: StringSelectInput
   ) {
     super(name, key, getFormValidation, validations, getRerender, value);
     this.webRef = null;
@@ -125,7 +125,7 @@ class StringSelectField extends BaseField<StringSelectInput, ComponentProps, Com
 
   public static getDerivedStateFromProps(
     nextProps: { [key: string]: any },
-    state: { [key: string]: any },
+    state: { [key: string]: any }
   ): null | { [key: string]: any } {
     return { ...state, value: (nextProps as any).value };
   }

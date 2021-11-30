@@ -6,9 +6,9 @@ import {
   Awaited,
   SweetAlert2,
   ReactSweetAlert,
-} from '@sotaoi/omni/definitions/notification-interface';
-import { Notification, PushRoute } from '@sotaoi/omni/contracts/notification-contract';
-import { CommandResult, ActionConclusion, AuthResult, TaskResult } from '@sotaoi/omni/transactions';
+} from '@sotaoi/contracts/definitions/notification-interface';
+import { Notification, PushRoute } from '@sotaoi/contracts/http/notification-contract';
+import { CommandResult, ActionConclusion, AuthResult, TaskResult } from '@sotaoi/contracts/transactions';
 
 class NotificationService extends Notification {
   public swal: SweetAlert2 & ReactSweetAlert;

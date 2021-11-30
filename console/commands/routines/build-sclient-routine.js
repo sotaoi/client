@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { Helper } = require('@sotaoi/omni/helper');
+const { Helper } = require('@sotaoi/client/helper');
 const { execSync } = require('child_process');
 
 const buildSclientRoutine = async (deploy) => {
@@ -57,7 +57,7 @@ const buildSclientRoutine = async (deploy) => {
       }
       item.substr(-4) === '.tsx' && fs.unlinkSync(item);
     },
-    [path.resolve('./deployment/node_modules')],
+    [path.resolve('./deployment/node_modules')]
   );
 
   deploy && fs.renameSync(path.resolve('./tmp.deployment/.git'), path.resolve('./deployment/.git'));
@@ -70,7 +70,7 @@ const buildSclientRoutine = async (deploy) => {
           {
             cwd: path.resolve('./deployment'),
             stdio: 'inherit',
-          },
+          }
         );
       } catch (err) {
         // do nothing

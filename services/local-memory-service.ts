@@ -1,5 +1,5 @@
 // import type { AsyncStorageStatic } from '@react-native-community/async-storage';
-import { LocalMemory } from '@sotaoi/omni/contracts/local-memory-contract';
+import { LocalMemory } from '@sotaoi/contracts/http/local-memory-contract';
 import { Helper } from '@sotaoi/client/helper';
 
 class LocalMemoryService extends LocalMemory {

@@ -1,8 +1,8 @@
-import { ActionConclusion, TaskResult } from '@sotaoi/omni/transactions';
+import { ActionConclusion, TaskResult } from '@sotaoi/contracts/transactions';
 import { store } from '@sotaoi/client/store';
 import { notification } from '@sotaoi/client/notification';
-import { Output } from '@sotaoi/omni/output';
-import { ErrorCode } from '@sotaoi/omni/errors';
+import { Output } from '@sotaoi/client/output';
+import { ErrorCode } from '@sotaoi/contracts/errors';
 
 const installBundle = (): Promise<ActionConclusion> => {
   return new Promise((resolve, reject) => {
@@ -31,8 +31,8 @@ const installBundle = (): Promise<ActionConclusion> => {
     } catch (err) {
       reject(
         notification().conclusion(
-          new TaskResult(400, ErrorCode.APP_GENERIC_ERROR, 'Error', 'Something went wrong', null, null, {}),
-        ),
+          new TaskResult(400, ErrorCode.APP_GENERIC_ERROR, 'Error', 'Something went wrong', null, null, {})
+        )
       );
     }
   });

@@ -1,7 +1,20 @@
-/build/*
-!/build/.gitkeep
-/node_modules
+**/certs/**
+!**/certs/.gitignore
+**/.idea/**
+**/logs/**
+!**/logs/.gitignore
+**/node_modules/**
+**/vendor/**
 
-/deployment/*
-!/deployment/.gitkeep
-/tmp.deployment
+.DS_Store
+.phpunit.result.cache
+*.log
+.env
+env.json
+secrets.json
+_ide_helper.php
+todo.txt
+Homestead.json
+Homestead.yaml
+
+#

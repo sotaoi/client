@@ -1,7 +1,7 @@
 import { CSSProperties } from 'react';
 import { getTaskFormComponent } from '@sotaoi/client/forms/form-components/task-form-component';
 import { BaseForm } from '@sotaoi/client/forms/form-classes/base-form';
-import { Artifacts, AuthRecord } from '@sotaoi/omni/artifacts';
+import { Artifacts, AuthRecord } from '@sotaoi/contracts/artifacts';
 import { FormConstructor } from '@sotaoi/client/forms';
 
 class TaskForm extends BaseForm {
@@ -17,7 +17,7 @@ class TaskForm extends BaseForm {
     repository: string,
     task: string,
     fields: FormConstructor,
-    destroy: () => undefined,
+    destroy: () => undefined
   ) {
     super(formId, authRecord, artifacts, role, repository, fields, destroy);
     this.task = task;

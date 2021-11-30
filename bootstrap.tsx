@@ -1,26 +1,26 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import { StoreCreator } from '@sotaoi/omni/definitions/redux';
-import { StoreContract } from '@sotaoi/omni/contracts/store-contract';
-import { LocalMemory } from '@sotaoi/omni/contracts/local-memory-contract';
-import { SocketContract } from '@sotaoi/omni/contracts/socket-contract';
+import { StoreCreator } from '@sotaoi/contracts/definitions/redux';
+import { StoreContract } from '@sotaoi/contracts/http/store-contract';
+import { LocalMemory } from '@sotaoi/contracts/http/local-memory-contract';
+import { SocketContract } from '@sotaoi/contracts/http/socket-contract';
 import { StoreService } from '@sotaoi/client/services/store-service';
 import { SocketService } from '@sotaoi/client/services/socket-service';
 import { ControlPanelService } from '@sotaoi/client/services/control-panel-service';
 import { Helper } from '@sotaoi/client/helper';
 import { AppKernel } from '@sotaoi/client/app-kernel';
 import { store } from '@sotaoi/client/store';
-import { AppInfoInterface } from '@sotaoi/omni/state';
-import { socket } from '@sotaoi/client/socket';
+import { AppInfoInterface } from '@sotaoi/contracts/state';
+// import { socket } from '@sotaoi/client/socket';
 import { lang } from '@sotaoi/client/lang';
 import { LocalMemoryService } from '@sotaoi/client/services/local-memory-service';
-import { InputValidatorService } from '@sotaoi/omni/services/input-validator-service';
-import { Logger } from '@sotaoi/omni/contracts/logger-contract';
+import { InputValidatorService } from '@sotaoi/forms/input-validator-service';
+import { Logger } from '@sotaoi/contracts/http/logger-contract';
 import { LoggerService } from '@sotaoi/client/services/logger-service';
-import { Lang } from '@sotaoi/omni/contracts/lang-contract';
+import { Lang } from '@sotaoi/contracts/http/lang-contract';
 import { LangService } from '@sotaoi/client/services/lang-service';
-import { InputValidator } from '@sotaoi/omni/contracts/input-validator-contract';
-import { Notification } from '@sotaoi/omni/contracts/notification-contract';
+import { InputValidator } from '@sotaoi/contracts/http/input-validator-contract';
+import { Notification } from '@sotaoi/contracts/http/notification-contract';
 import { NotificationService } from '@sotaoi/client/services/notification-service';
 import { pushRoute } from '@sotaoi/client/router';
 import { BaseForm } from '@sotaoi/client/forms/form-classes/base-form';
@@ -37,7 +37,7 @@ class Bootstrap {
     Loading: React.FunctionComponent,
     ErrorComponent: React.FunctionComponent<{ error: Error }>,
     formNotifications: boolean,
-    mpackages: { [key: string]: any },
+    mpackages: { [key: string]: any }
   ): Promise<void> {
     Object.entries(mpackages).map(([name, pkg]) => {
       setPackage(name, pkg);
@@ -48,11 +48,12 @@ class Bootstrap {
     appKernel.bootstrap((app) => {
       // Input Validator
       !app().has('app.system.inputValidator') &&
+        // @ts-ignore
         app().singleton<InputValidator>('app.system.inputValidator', (): InputValidatorService => {
           return new InputValidatorService(
             {},
             () => null,
-            () => Promise.resolve([]),
+            () => Promise.resolve([])
           );
         });
 
@@ -127,12 +128,12 @@ class Bootstrap {
               <div style={{ display: 'flex', flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                 Service is currently unavailable, we are currently undergoing maintenance operations
               </div>,
-              document.getElementById('bootstrap'),
+              document.getElementById('bootstrap')
             );
             return;
           }
           ReactDom.render(routerComponentFn(), document.getElementById('bootstrap'));
-        } catch (err) {
+        } catch (err: any) {
           console.error(err);
           ReactDom.render(<ErrorComponent error={err} />, document.getElementById('bootstrap'));
         }

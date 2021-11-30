@@ -1,5 +1,5 @@
 import chalk from 'chalk';
-import { Logger } from '@sotaoi/omni/contracts/logger-contract';
+import { Logger } from '@sotaoi/contracts/http/logger-contract';
 
 const log = console.log;
 const warn = console.warn;

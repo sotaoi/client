@@ -1,12 +1,12 @@
 import React from 'react';
 import { BaseField, FieldConstructor } from '@sotaoi/client/forms/fields/base-field';
 import { assignFields } from '@sotaoi/client/forms/fields/assign-fields';
-import { Payload, CommandResult, AuthResult, TaskResult, ActionConclusion } from '@sotaoi/omni/transactions';
-import { AuthRecord, Artifacts } from '@sotaoi/omni/artifacts';
-import { BaseInput, FormValidations } from '@sotaoi/omni/input/base-input';
+import { Payload, CommandResult, AuthResult, TaskResult, ActionConclusion } from '@sotaoi/contracts/transactions';
+import { AuthRecord, Artifacts } from '@sotaoi/contracts/artifacts';
+import { BaseInput, FormValidations } from '@sotaoi/input/base-input';
 import { Helper } from '@sotaoi/client/helper';
 import { SingleCollectionConstructor, CollectionConstructor } from '@sotaoi/client/forms/fields/collection-field';
-import { InputValidator, InputValidationResult } from '@sotaoi/omni/contracts/input-validator-contract';
+import { InputValidator, InputValidationResult } from '@sotaoi/contracts/http/input-validator-contract';
 import _ from 'lodash';
 import { Action } from '@sotaoi/client/action';
 import { Output } from '@sotaoi/client/output';
@@ -79,7 +79,7 @@ abstract class BaseForm {
       constructors: { [key: string]: FieldConstructor | CollectionConstructor | SingleCollectionConstructor };
       validations: FormValidations;
     },
-    destroy: () => void,
+    destroy: () => void
   ) {
     if (typeof BaseForm.inputValidator === 'undefined') {
       throw new Error('form initialization error, no input validator');
@@ -98,7 +98,7 @@ abstract class BaseForm {
     // @ts-ignore
     this.fields = assignFields(this, '', this.fieldConstructors);
     this.formValidation = BaseForm.inputValidator.getFormValidation(
-      (key: string) => _.get(this.getFields(), key)?.value || null,
+      (key: string) => _.get(this.getFields(), key)?.value || null
     );
 
     this.setState = <StateType = { [key: string]: any }>(state: StateType): void => undefined;
@@ -209,7 +209,7 @@ abstract class BaseForm {
         this.fields,
         this.validations,
         '',
-        type === 'update' && Output.ALLOW_SKIP_UNCHANGED,
+        type === 'update' && Output.ALLOW_SKIP_UNCHANGED
       );
       validationResult = this.formValidation.getResult();
       this.setValidating(false);
@@ -224,7 +224,7 @@ abstract class BaseForm {
       switch (true) {
         case type === 'store':
           payloadInit = Helper.flatten(
-            Helper.iterate(Helper.clone(this._getFormState().getFields()), '', Output.getFieldTransformer(false)),
+            Helper.iterate(Helper.clone(this._getFormState().getFields()), '', Output.getFieldTransformer(false))
           );
           conclusion = await Action.store(
             // access token
@@ -236,14 +236,14 @@ abstract class BaseForm {
             // repository
             this.repository,
             // payload
-            new Payload(payloadInit),
+            new Payload(payloadInit)
           );
           BaseForm.NOTIFY && (await conclusion.notify());
           commandOutput = conclusion.commandResult();
           break;
         case type === 'update':
           payloadInit = Helper.flatten(
-            Helper.iterate(Helper.clone(this._getFormState().getFields()), '', Output.getFieldTransformer(true)),
+            Helper.iterate(Helper.clone(this._getFormState().getFields()), '', Output.getFieldTransformer(true))
           );
           if (!this.uuid) {
             throw new Error('something went wrong - update form is missing uuid');
@@ -260,14 +260,14 @@ abstract class BaseForm {
             // uuid,
             this.uuid,
             // payload
-            new Payload(payloadInit),
+            new Payload(payloadInit)
           );
           BaseForm.NOTIFY && (await conclusion.notify());
           commandOutput = conclusion.commandResult();
           break;
         case type === 'auth':
           payloadInit = Helper.flatten(
-            Helper.iterate(Helper.clone(this._getFormState().getFields()), '', Output.getFieldTransformer(false)),
+            Helper.iterate(Helper.clone(this._getFormState().getFields()), '', Output.getFieldTransformer(false))
           );
           if (!this.strategy) {
             throw new Error('something went wrong - auth form is missing strategy');
@@ -280,7 +280,7 @@ abstract class BaseForm {
             // strategy
             this.strategy || '',
             // payload
-            new Payload(payloadInit),
+            new Payload(payloadInit)
           );
           // no await notify here
           // BaseForm.NOTIFY && (await conclusion.notify());
@@ -309,7 +309,7 @@ abstract class BaseForm {
           return;
         case type === 'task':
           payloadInit = Helper.flatten(
-            Helper.iterate(Helper.clone(this._getFormState().getFields()), '', Output.getFieldTransformer(false)),
+            Helper.iterate(Helper.clone(this._getFormState().getFields()), '', Output.getFieldTransformer(false))
           );
           if (!this.task) {
             throw new Error('something went wrong - no task in form');
@@ -326,7 +326,7 @@ abstract class BaseForm {
             // task,
             this.task,
             // payload
-            new Payload(payloadInit),
+            new Payload(payloadInit)
           );
           BaseForm.NOTIFY && (await conclusion.notify());
           taskOutput = conclusion.taskResult();
@@ -367,7 +367,7 @@ abstract class BaseForm {
   }
 
   public getFields<
-    FieldState extends { [key: string]: BaseField<any> } = { [key: string]: BaseField<any> },
+    FieldState extends { [key: string]: BaseField<any> } = { [key: string]: BaseField<any> }
   >(): FieldState {
     return this.getState().form.getFields();
   }

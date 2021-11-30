@@ -1,4 +1,4 @@
-import { FormValidations } from '@sotaoi/omni/input/base-input';
+import { FormValidations } from '@sotaoi/input/base-input';
 
 const controlPanelForms: { [key: string]: () => Promise<FormValidations> } = {
   'install-master-bundle-task': async () => ({}),

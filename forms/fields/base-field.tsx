@@ -1,7 +1,7 @@
 import React from 'react';
 import { Helper } from '@sotaoi/client/helper';
-import { InputValidator } from '@sotaoi/omni/contracts/input-validator-contract';
-import { BaseInput, FieldValidation } from '@sotaoi/omni/input/base-input';
+import { InputValidator } from '@sotaoi/contracts/http/input-validator-contract';
+import { BaseInput, FieldValidation } from '@sotaoi/input/base-input';
 import type { CollectionField as CollectionFieldType } from '@sotaoi/client/forms/fields/collection-field';
 
 interface FieldConstructor {
@@ -60,7 +60,7 @@ abstract class BaseField<ValueType, ComponentProps = any, ComponentState = any> 
     getFormValidation: () => InputValidator<(key: string) => void | null | BaseInput<any, any>>,
     validations: null | FieldValidation[],
     getRerender: () => (force: boolean) => void,
-    value: ValueType,
+    value: ValueType
   ) {
     this.renderUuid = Helper.uuid();
     this.name = name;
@@ -170,7 +170,7 @@ abstract class BaseField<ValueType, ComponentProps = any, ComponentState = any> 
       () => ({}),
       [],
       () => ({}),
-      null,
+      null
     );
     return instance.convert(value).input(instance.constructor);
   }

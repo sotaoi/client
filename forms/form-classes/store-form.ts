@@ -1,6 +1,6 @@
 import { CSSProperties } from 'react';
 import { getStoreFormComponent } from '@sotaoi/client/forms/form-components/store-form-component';
-import { AuthRecord, Artifacts } from '@sotaoi/omni/artifacts';
+import { AuthRecord, Artifacts } from '@sotaoi/contracts/artifacts';
 import { BaseForm } from '@sotaoi/client/forms/form-classes/base-form';
 import { FormConstructor } from '@sotaoi/client/forms';
 
@@ -15,7 +15,7 @@ class StoreForm extends BaseForm {
     role: null | string,
     repository: string,
     fields: FormConstructor,
-    destroy: () => void,
+    destroy: () => void
   ) {
     super(formId, authRecord, artifacts, role, repository, fields, destroy);
     this.FormComponent = getStoreFormComponent(this);

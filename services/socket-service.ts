@@ -1,4 +1,4 @@
-import { SocketContract, SocketClass, SocketOptions } from '@sotaoi/omni/contracts/socket-contract';
+import { SocketContract, SocketClass, SocketOptions } from '@sotaoi/contracts/http/socket-contract';
 // @ts-ignore
 import { io } from 'socket.io/client-dist/socket.io';
 

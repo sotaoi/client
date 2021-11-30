@@ -1,8 +1,8 @@
 import { StoreForm } from '@sotaoi/client/forms/form-classes/store-form';
 import { UpdateForm } from '@sotaoi/client/forms/form-classes/update-form';
 import { AuthForm } from '@sotaoi/client/forms/form-classes/auth-form';
-import { AuthRecord, Artifacts } from '@sotaoi/omni/artifacts';
-import { FormValidations } from '@sotaoi/omni/input/base-input';
+import { AuthRecord, Artifacts } from '@sotaoi/contracts/artifacts';
+import { FormValidations } from '@sotaoi/input/base-input';
 import { FieldConstructor } from '@sotaoi/client/forms/fields/base-field';
 import { SingleCollectionConstructor, CollectionConstructor } from '@sotaoi/client/forms/fields/collection-field';
 import { BaseForm } from '@sotaoi/client/forms/form-classes/base-form';
@@ -20,7 +20,7 @@ const StoreFormFactory = (
   artifacts: Artifacts,
   role: null | string,
   repository: string,
-  fields: FormConstructor,
+  fields: FormConstructor
 ): StoreForm => {
   let formId: string;
   const formSerial = JSON.stringify({
@@ -33,14 +33,14 @@ const StoreFormFactory = (
       (
         result: { [key: string]: any },
         [key, field],
-        index: number,
+        index: number
       ): {
         [key: string]: any;
       } => {
         result[key] = field.type;
         return result;
       },
-      {},
+      {}
     ),
     fieldValidations: fields.validations,
   });
@@ -75,7 +75,7 @@ const UpdateFormFactory = (
   role: null | string,
   repository: string,
   fields: FormConstructor,
-  uuid: string,
+  uuid: string
 ): UpdateForm => {
   let formId: string;
   const formSerial = JSON.stringify({
@@ -117,7 +117,7 @@ const AuthFormFactory = (
   artifacts: Artifacts,
   repository: string,
   fields: FormConstructor,
-  strategy: string,
+  strategy: string
 ): AuthForm => {
   let formId: string;
   const formSerial = JSON.stringify({
@@ -159,7 +159,7 @@ const TaskFormFactory = (
   role: null | string,
   repository: string,
   task: string,
-  fields: FormConstructor,
+  fields: FormConstructor
 ): TaskForm => {
   let formId: string;
   const formSerial = JSON.stringify({

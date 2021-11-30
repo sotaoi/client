@@ -27,4 +27,4 @@ class TextField extends InputField<ComponentProps | any> {
 }
 
 export { TextField };
-export { StringInput } from '@sotaoi/omni/input/string-input';
+export { StringInput } from '@sotaoi/input/string-input';

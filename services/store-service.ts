@@ -1,10 +1,10 @@
-import { StoreContract } from '@sotaoi/omni/contracts/store-contract';
-import { Lang, State, Seed, AppInfoInterface } from '@sotaoi/omni/state';
-import { AuthRecord } from '@sotaoi/omni/artifacts';
-import { StoreCreator } from '@sotaoi/omni/definitions/redux';
+import { StoreContract } from '@sotaoi/contracts/http/store-contract';
+import { Lang, State, Seed, AppInfoInterface } from '@sotaoi/contracts/state';
+import { AuthRecord } from '@sotaoi/contracts/artifacts';
+import { StoreCreator } from '@sotaoi/contracts/definitions/redux';
 import { BaseForm } from '@sotaoi/client/forms/form-classes/base-form';
-import { LocalMemory } from '@sotaoi/omni/contracts/local-memory-contract';
-import { InputValidator } from '@sotaoi/omni/contracts/input-validator-contract';
+import { LocalMemory } from '@sotaoi/contracts/http/local-memory-contract';
+import { InputValidator } from '@sotaoi/contracts/http/input-validator-contract';
 import { Navigation } from '@sotaoi/client/router/navigation';
 import { Helper } from '@sotaoi/client/helper';
 
@@ -37,7 +37,7 @@ class StoreService extends StoreContract {
     apiUrl: string,
     createStore: StoreCreator,
     inputValidator: InputValidator,
-    localMemory: LocalMemory,
+    localMemory: LocalMemory
   ) {
     super(appInfo, apiUrl, createStore, inputValidator, localMemory);
     this.currentPath = null;
@@ -59,7 +59,7 @@ class StoreService extends StoreContract {
     while (!seed && getSeedTries < 15) {
       try {
         await getSeed();
-      } catch (err) {
+      } catch (err: any) {
         getSeedTries++;
         err && err.stack ? console.warn(err.name, err.message, err.stack) : console.warn(err);
         await new Promise((resolve) => setTimeout(resolve, 3000));

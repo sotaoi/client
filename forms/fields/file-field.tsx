@@ -1,8 +1,8 @@
 import React from 'react';
 import { BaseField, FieldInit } from '@sotaoi/client/forms/fields/base-field';
-import { BaseInput, FieldValidation } from '@sotaoi/omni/input/base-input';
-import { FileInput, FileValue, FileFieldType } from '@sotaoi/omni/input/file-input';
-import { InputValidator } from '@sotaoi/omni/contracts/input-validator-contract';
+import { BaseInput, FieldValidation } from '@sotaoi/input/base-input';
+import { FileInput, FileValue, FileFieldType } from '@sotaoi/input/file-input';
+import { InputValidator } from '@sotaoi/contracts/http/input-validator-contract';
 import { Helper } from '@sotaoi/client/helper';
 
 type ComponentStateValue = null | File;
@@ -22,7 +22,7 @@ class FileField extends BaseField<FileInput, ComponentProps, ComponentState> {
     getFormValidation: () => InputValidator<(key: string) => void | null | BaseInput<any, any>>,
     validations: FieldValidation[],
     getRerender: () => (force: boolean) => void,
-    value: FileInput,
+    value: FileInput
   ) {
     super(name, key, getFormValidation, validations, getRerender, value);
     this.ref = null;
@@ -129,7 +129,7 @@ class FileField extends BaseField<FileInput, ComponentProps, ComponentState> {
 
   public static getDerivedStateFromProps(
     nextProps: { [key: string]: any },
-    state: { [key: string]: any },
+    state: { [key: string]: any }
   ): null | { [key: string]: any } {
     return { ...state, value: (nextProps as any).value };
   }
