@@ -6,12 +6,6 @@
   "engines": {
     "node": "14.x"
   },
-  "scripts": {
-    "build:sclient": "node ./console/commands/build/build-sclient",
-    "deploy:sclient": "node ./console/commands/deploy/deploy-sclient",
-    "clean:bootstrap": "node ./console/commands/clean/clean-bootstrap",
-    "clean:sclient": "node ./console/commands/clean/clean-sclient"
-  },
   "peerDependencies": {
     "@sotaoi/config": "0.9.7",
     "@sotaoi/contracts": "git+https://github.com/sotaoi/contracts#master",
