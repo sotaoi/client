@@ -18,7 +18,7 @@ const main = async () => {
   })
     .console()
     .command('publish:sclient', null, null, () => {
-      execSync(`npm publish --access public`, { cwd: path.resolve('./deployment'), stdio: 'inherit' });
+      execSync(`npm publish --access public`, { cwd: path.resolve('./'), stdio: 'inherit' });
     })
     .run();
 };
