@@ -41,7 +41,7 @@ abstract class RouteComponent<ComponentProps> extends React.Component<ComponentP
         this.component = (data: RouteData<ComponentProps>): null | React.ReactElement => {
           try {
             return this.web(data);
-          } catch (err) {
+          } catch (err: any) {
             const Component = this.errorComponent;
             return <Component error={err} />;
           }
@@ -51,7 +51,7 @@ abstract class RouteComponent<ComponentProps> extends React.Component<ComponentP
         this.component = (data: RouteData<ComponentProps>): null | React.ReactElement => {
           try {
             return this.mobile(data);
-          } catch (err) {
+          } catch (err: any) {
             const Component = this.errorComponent;
             return <Component error={err} />;
           }
@@ -61,7 +61,7 @@ abstract class RouteComponent<ComponentProps> extends React.Component<ComponentP
         this.component = (data: RouteData<ComponentProps>): null | React.ReactElement => {
           try {
             return this.electron(data);
-          } catch (err) {
+          } catch (err: any) {
             const Component = this.errorComponent;
             return <Component error={err} />;
           }
@@ -187,7 +187,7 @@ abstract class ViewComponent<
         this.component = (data: ViewData<ComponentProps, MappedState, DispatchProps>): null | React.ReactElement => {
           try {
             return this.web(data);
-          } catch (err) {
+          } catch (err: any) {
             const Component = this.errorComponent;
             return <Component error={err} />;
           }
@@ -197,7 +197,7 @@ abstract class ViewComponent<
         this.component = (data: ViewData<ComponentProps, MappedState, DispatchProps>): null | React.ReactElement => {
           try {
             return this.mobile(data);
-          } catch (err) {
+          } catch (err: any) {
             const Component = this.errorComponent;
             return <Component error={err} />;
           }
@@ -207,7 +207,7 @@ abstract class ViewComponent<
         this.component = (data: ViewData<ComponentProps, MappedState, DispatchProps>): null | React.ReactElement => {
           try {
             return this.electron(data);
-          } catch (err) {
+          } catch (err: any) {
             const Component = this.errorComponent;
             return <Component error={err} />;
           }
@@ -420,11 +420,8 @@ class RequestAbortHandler extends RequestAbortHandlerAbstract {
 const GenericErrorComponent = (props: NoProps) => {
   log('no props:', props);
 
-  // todo here: todo
-  const domain = '0.0.0.0';
-
   if (Helper.isWeb()) {
-    return <img src={`https://${domain}/sotaoi/errors/error.svg`} style={{ margin: 10, width: 100, height: 100 }} />;
+    return <img src={`/sotaoi/errors/error.svg`} style={{ margin: 10, width: 100, height: 100 }} />;
   }
   if (Helper.isMobile()) {
     const { View } = require('react-native');
@@ -432,7 +429,7 @@ const GenericErrorComponent = (props: NoProps) => {
     return (
       <View style={{ flex: 1, margin: 20 }}>
         <View style={{ width: 200, height: 200, justifyContent: 'center', alignItems: 'center' }}>
-          <SvgCssUri uri={`https://${domain}/sotaoi/errors/error.svg`} width={200} height={200} />
+          <SvgCssUri uri={`/sotaoi/errors/error.svg`} width={200} height={200} />
         </View>
       </View>
     );
