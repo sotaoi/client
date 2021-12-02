@@ -12,8 +12,6 @@ import { SocketListener } from '@sotaoi/contracts/http/socket-contract';
 import { pushRoute } from '@sotaoi/client/router';
 import { getPackage } from '@sotaoi/client/mpackages';
 
-const log = console.log;
-
 interface NoProps {}
 
 interface RouteData<ComponentProps = NoProps> {
@@ -418,8 +416,6 @@ class RequestAbortHandler extends RequestAbortHandlerAbstract {
 }
 
 const GenericErrorComponent = (props: NoProps) => {
-  log('no props:', props);
-
   if (Helper.isWeb()) {
     return <img src={`/sotaoi/errors/error.svg`} style={{ margin: 10, width: 100, height: 100 }} />;
   }
