@@ -375,8 +375,8 @@ abstract class ViewComponent<
             this.requestAbortHandler.clear();
           });
       };
-      socket().io().on(ListenerEvent(ListenerEventType.DB.Records.UPDATED, recordRef), listener);
-      socket().io().on(ListenerEvent(ListenerEventType.DB.Records.REMOVED, recordRef), listener);
+      // socket().io().on(ListenerEvent(ListenerEventType.DB.Records.UPDATED, recordRef), listener);
+      // socket().io().on(ListenerEvent(ListenerEventType.DB.Records.REMOVED, recordRef), listener);
       this.refreshListeners[recordRef.serialize()] = listener;
     });
   }
@@ -385,14 +385,14 @@ abstract class ViewComponent<
     if (!Object.keys(this.refreshListeners).length) {
       return;
     }
-    Object.entries(this.refreshListeners).map(([key, listener]) => {
-      socket()
-        .io()
-        .off(ListenerEvent(ListenerEventType.DB.Records.UPDATED, RecordRef.deserialize(key)), listener);
-      socket()
-        .io()
-        .off(ListenerEvent(ListenerEventType.DB.Records.REMOVED, RecordRef.deserialize(key)), listener);
-    });
+    // Object.entries(this.refreshListeners).map(([key, listener]) => {
+    //   socket()
+    //     .io()
+    //     .off(ListenerEvent(ListenerEventType.DB.Records.UPDATED, RecordRef.deserialize(key)), listener);
+    //   socket()
+    //     .io()
+    //     .off(ListenerEvent(ListenerEventType.DB.Records.REMOVED, RecordRef.deserialize(key)), listener);
+    // });
   }
 }
 
