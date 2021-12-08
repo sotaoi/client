@@ -1,7 +1,7 @@
 import { ActionConclusion, TaskResult } from '@sotaoi/contracts/transactions';
 import { store } from '@sotaoi/client/store';
 import { notification } from '@sotaoi/client/notification';
-import { Output } from '@sotaoi/client/output';
+import { output } from '@sotaoi/client/output';
 import { ErrorCode } from '@sotaoi/contracts/errors';
 
 const installBundle = (): Promise<ActionConclusion> => {
@@ -19,7 +19,7 @@ const installBundle = (): Promise<ActionConclusion> => {
           res
             .json()
             .then((res) => {
-              resolve(notification().conclusion(Output.parseTask(res)));
+              resolve(notification().conclusion(output().parseTask(res)));
             })
             .catch((err) => {
               throw err;

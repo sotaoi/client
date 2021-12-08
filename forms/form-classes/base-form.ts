@@ -9,7 +9,7 @@ import { SingleCollectionConstructor, CollectionConstructor } from '@sotaoi/clie
 import { InputValidatorContract, InputValidationResult } from '@sotaoi/contracts/http/input-validator-contract';
 import _ from 'lodash';
 import { action } from '@sotaoi/client/action';
-import { Output } from '@sotaoi/client/output';
+import { output } from '@sotaoi/client/output';
 import { store } from '@sotaoi/client/store';
 
 interface FormState {
@@ -200,16 +200,16 @@ abstract class BaseForm {
       let authOutput: AuthResult;
       let taskOutput: TaskResult;
       let validationResult: InputValidationResult;
-      const isUpdateCommand = type === 'update' && Output.ALLOW_SKIP_UNCHANGED;
+      const isUpdateCommand = type === 'update' && output().allowSkipUnchanged();
 
-      Helper.iterate(this.fields, '', Output.getTouchFieldsTransformer(isUpdateCommand));
+      Helper.iterate(this.fields, '', output().getTouchFieldsTransformer(isUpdateCommand));
 
       this.setValidating(true);
       await this.formValidation.validatePayload(
         this.fields,
         this.validations,
         '',
-        type === 'update' && Output.ALLOW_SKIP_UNCHANGED
+        type === 'update' && output().allowSkipUnchanged()
       );
       validationResult = this.formValidation.getResult();
       this.setValidating(false);
@@ -224,7 +224,7 @@ abstract class BaseForm {
       switch (true) {
         case type === 'store':
           payloadInit = Helper.flatten(
-            Helper.iterate(Helper.clone(this._getFormState().getFields()), '', Output.getFieldTransformer(false))
+            Helper.iterate(Helper.clone(this._getFormState().getFields()), '', output().getFieldTransformer(false))
           );
           conclusion = await action().store(
             // access token
@@ -243,7 +243,7 @@ abstract class BaseForm {
           break;
         case type === 'update':
           payloadInit = Helper.flatten(
-            Helper.iterate(Helper.clone(this._getFormState().getFields()), '', Output.getFieldTransformer(true))
+            Helper.iterate(Helper.clone(this._getFormState().getFields()), '', output().getFieldTransformer(true))
           );
           if (!this.uuid) {
             throw new Error('something went wrong - update form is missing uuid');
@@ -267,7 +267,7 @@ abstract class BaseForm {
           break;
         case type === 'auth':
           payloadInit = Helper.flatten(
-            Helper.iterate(Helper.clone(this._getFormState().getFields()), '', Output.getFieldTransformer(false))
+            Helper.iterate(Helper.clone(this._getFormState().getFields()), '', output().getFieldTransformer(false))
           );
           if (!this.strategy) {
             throw new Error('something went wrong - auth form is missing strategy');
@@ -309,7 +309,7 @@ abstract class BaseForm {
           return;
         case type === 'task':
           payloadInit = Helper.flatten(
-            Helper.iterate(Helper.clone(this._getFormState().getFields()), '', Output.getFieldTransformer(false))
+            Helper.iterate(Helper.clone(this._getFormState().getFields()), '', output().getFieldTransformer(false))
           );
           if (!this.task) {
             throw new Error('something went wrong - no task in form');

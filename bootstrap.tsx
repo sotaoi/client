@@ -26,9 +26,11 @@ import { pushRoute } from '@sotaoi/client/router';
 import { BaseForm } from '@sotaoi/client/forms/form-classes/base-form';
 import { getPackage, setPackage } from '@sotaoi/client/mpackages';
 import { AssetService } from '@sotaoi/client/services/asset-service';
-import { SotaoiActionService } from './services/action-service';
+import { SotaoiActionService } from '@sotaoi/client/services/action-service';
 import { ActionContract } from '@sotaoi/contracts/http/action-contract';
 import { ControlPanelContract } from '@sotaoi/contracts/http/control-panel-contract';
+import { OutputContract } from '@sotaoi/contracts/http/output-contract';
+import { OutputService } from './services/output-service';
 
 class Bootstrap {
   public static async init(
@@ -49,6 +51,12 @@ class Bootstrap {
     BaseForm.NOTIFY = formNotifications;
 
     appKernel.bootstrap((app) => {
+      // Output
+      !app().has('app.system.output') &&
+        app().singleton<OutputContract>('app.system.output', (): OutputService => {
+          return new OutputService();
+        });
+
       // Action
       !app().has('app.system.action') &&
         app().singleton<ActionContract>('app.system.action', (): SotaoiActionService => {
