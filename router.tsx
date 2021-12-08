@@ -8,7 +8,7 @@ import { Store as ReduxStore } from 'redux';
 import { ErrorComponent } from '@sotaoi/client/services/control-panel-service/components/generic/error-component';
 import { InstallLayout } from '@sotaoi/client/services/control-panel-service/components/install-layout/install-layout';
 import { InstallForm } from '@sotaoi/client/services/control-panel-service/components/install-layout/forms/install-form';
-import { ControlPanel } from '@sotaoi/contracts/http/control-panel-contract';
+import { ControlPanelContract } from '@sotaoi/contracts/http/control-panel-contract';
 import { store } from '@sotaoi/client/store';
 import { RouteComponent, ViewComponent } from '@sotaoi/client/components';
 
@@ -20,7 +20,7 @@ type ExtendedComponent = (new (...args: any[]) => ViewComponent<any>) | (new (..
 type LayoutComponentMap = { [key: string]: React.FunctionComponent<LayoutProps> };
 
 interface RouterProps {
-  controlPanel: null | (() => ControlPanel);
+  controlPanel: null | (() => ControlPanelContract);
   config: RouterConfig;
   extendedComponents: ExtendedComponent[];
   layoutComponents: LayoutComponentMap;

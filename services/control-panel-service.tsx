@@ -1,6 +1,6 @@
 import React from 'react';
 import { RoutesConfig } from '@sotaoi/contracts/state';
-import { ControlPanel } from '@sotaoi/contracts/http/control-panel-contract';
+import { ControlPanelContract } from '@sotaoi/contracts/http/control-panel-contract';
 import { Helper } from '@sotaoi/client/helper';
 import { store } from '@sotaoi/client/store';
 import { GateLayout } from '@sotaoi/client/services/control-panel-service/components/gate-layout/gate-layout';
@@ -8,7 +8,7 @@ import { MainLayout } from '@sotaoi/client/services/control-panel-service/compon
 import { redirect } from '@sotaoi/client/router';
 import { AuthMaintainerView } from '@sotaoi/client/services/control-panel-service/components/gate-layout/views/maintainer/auth-maintainer-view';
 
-class ControlPanelService extends ControlPanel {
+class ControlPanelService extends ControlPanelContract {
   public getRoutesConfigGate(prefix: string): RoutesConfig {
     prefix = '/' + Helper.trim('/', prefix) + '/gate';
 

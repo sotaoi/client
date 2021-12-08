@@ -36,9 +36,9 @@
   },
   "dependencies": {
     "@sotaoi/client": "file:./",
-    "@sotaoi/contracts": "^1.0.2",
-    "@sotaoi/forms": "^1.0.2",
-    "@sotaoi/input": "^1.0.2",
+    "@sotaoi/contracts": "^1.0.3",
+    "@sotaoi/forms": "^1.0.3",
+    "@sotaoi/input": "^1.0.3",
     "@sotaoi/storage-driver": "1.1.8",
     "chalk": "^4.1.0",
     "i18next": "^20.2.1",

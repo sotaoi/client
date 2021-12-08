@@ -3,8 +3,8 @@ import { Lang, State, Seed, AppInfoInterface } from '@sotaoi/contracts/state';
 import { AuthRecord } from '@sotaoi/contracts/artifacts';
 import { StoreCreator } from '@sotaoi/contracts/definitions/redux';
 import { BaseForm } from '@sotaoi/client/forms/form-classes/base-form';
-import { LocalMemory } from '@sotaoi/contracts/http/local-memory-contract';
-import { InputValidator } from '@sotaoi/contracts/http/input-validator-contract';
+import { LocalMemoryContract } from '@sotaoi/contracts/http/local-memory-contract';
+import { InputValidatorContract } from '@sotaoi/contracts/http/input-validator-contract';
 import { Navigation } from '@sotaoi/client/router/navigation';
 import { Helper } from '@sotaoi/client/helper';
 
@@ -36,8 +36,8 @@ class StoreService extends StoreContract {
     appInfo: AppInfoInterface,
     apiUrl: string,
     createStore: StoreCreator,
-    inputValidator: InputValidator,
-    localMemory: LocalMemory
+    inputValidator: InputValidatorContract,
+    localMemory: LocalMemoryContract
   ) {
     super(appInfo, apiUrl, createStore, inputValidator, localMemory);
     this.currentPath = null;

@@ -6,9 +6,9 @@ import { AuthRecord, Artifacts } from '@sotaoi/contracts/artifacts';
 import { BaseInput, FormValidations } from '@sotaoi/input/base-input';
 import { Helper } from '@sotaoi/client/helper';
 import { SingleCollectionConstructor, CollectionConstructor } from '@sotaoi/client/forms/fields/collection-field';
-import { InputValidator, InputValidationResult } from '@sotaoi/contracts/http/input-validator-contract';
+import { InputValidatorContract, InputValidationResult } from '@sotaoi/contracts/http/input-validator-contract';
 import _ from 'lodash';
-import { Action } from '@sotaoi/client/action';
+import { action } from '@sotaoi/client/action';
 import { Output } from '@sotaoi/client/output';
 import { store } from '@sotaoi/client/store';
 
@@ -36,7 +36,7 @@ abstract class BaseForm {
   public task: null | string;
   public fieldConstructors: { [key: string]: FieldConstructor | CollectionConstructor | SingleCollectionConstructor };
   public fields: { [key: string]: BaseField<any> };
-  public formValidation: InputValidator<(key: string) => void | null | BaseInput<any, any>>;
+  public formValidation: InputValidatorContract<(key: string) => void | null | BaseInput<any, any>>;
 
   public unmounted = false;
 
@@ -65,7 +65,7 @@ abstract class BaseForm {
   protected _realOnAuthSuccess: (result: AuthResult) => Promise<any>;
   protected _realOnTaskSuccess: (result: TaskResult) => Promise<any>;
 
-  protected static inputValidator: InputValidator;
+  protected static inputValidator: InputValidatorContract;
 
   public reset: () => void;
 
@@ -226,7 +226,7 @@ abstract class BaseForm {
           payloadInit = Helper.flatten(
             Helper.iterate(Helper.clone(this._getFormState().getFields()), '', Output.getFieldTransformer(false))
           );
-          conclusion = await Action.store(
+          conclusion = await action().store(
             // access token
             store().getAccessToken(),
             // artifacts
@@ -248,7 +248,7 @@ abstract class BaseForm {
           if (!this.uuid) {
             throw new Error('something went wrong - update form is missing uuid');
           }
-          conclusion = await Action.update(
+          conclusion = await action().update(
             // access token
             store().getAccessToken(),
             // artifacts
@@ -272,7 +272,7 @@ abstract class BaseForm {
           if (!this.strategy) {
             throw new Error('something went wrong - auth form is missing strategy');
           }
-          conclusion = await Action.auth(
+          conclusion = await action().auth(
             // artifacts
             this.artifacts,
             // repository
@@ -314,7 +314,7 @@ abstract class BaseForm {
           if (!this.task) {
             throw new Error('something went wrong - no task in form');
           }
-          conclusion = await Action.task(
+          conclusion = await action().task(
             // access token
             store().getAccessToken(),
             // artifacts
@@ -372,7 +372,7 @@ abstract class BaseForm {
     return this.getState().form.getFields();
   }
 
-  public static setup(inputValidator: InputValidator): void {
+  public static setup(inputValidator: InputValidatorContract): void {
     this.inputValidator = inputValidator;
   }
 

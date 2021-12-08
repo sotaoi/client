@@ -2,7 +2,7 @@ import { assignFields } from '@sotaoi/client/forms/fields/assign-fields';
 import { BaseField, FieldInit, FieldConstructor } from '@sotaoi/client/forms/fields/base-field';
 import { Helper } from '@sotaoi/client/helper';
 import { BaseForm } from '@sotaoi/client/forms/form-classes/base-form';
-import { InputValidator } from '@sotaoi/contracts/http/input-validator-contract';
+import { InputValidatorContract } from '@sotaoi/contracts/http/input-validator-contract';
 import { BaseInput } from '@sotaoi/input/base-input';
 
 interface SingleCollectionConstructor {
@@ -32,7 +32,7 @@ class SingleCollectionField extends BaseField<any> {
     getSetState: () => (force: boolean) => void,
     form: BaseForm,
     key: string,
-    getFormValidation: () => InputValidator<(key: string) => void | null | BaseInput<any, any>>,
+    getFormValidation: () => InputValidatorContract<(key: string) => void | null | BaseInput<any, any>>,
     standardFields: { [key: string]: FieldConstructor | CollectionConstructor | SingleCollectionConstructor },
     values: { [key: string]: FieldConstructor | CollectionConstructor | SingleCollectionConstructor }
   ) {
@@ -118,7 +118,7 @@ class CollectionField extends BaseField<any> {
     getSetState: () => (force: boolean) => void,
     form: BaseForm,
     key: string,
-    getFormValidation: () => InputValidator<(key: string) => void | null | BaseInput<any, any>>,
+    getFormValidation: () => InputValidatorContract<(key: string) => void | null | BaseInput<any, any>>,
     min: null | number,
     max: null | number,
     standardFields: { [key: string]: FieldConstructor | CollectionConstructor | SingleCollectionConstructor },

@@ -2,7 +2,7 @@ import React from 'react';
 import { BaseField, FieldInit } from '@sotaoi/client/forms/fields/base-field';
 import { BaseInput, FieldValidation } from '@sotaoi/input/base-input';
 import { FileInput, FileValue, FileFieldType } from '@sotaoi/input/file-input';
-import { InputValidator } from '@sotaoi/contracts/http/input-validator-contract';
+import { InputValidatorContract } from '@sotaoi/contracts/http/input-validator-contract';
 import { Helper } from '@sotaoi/client/helper';
 
 type ComponentStateValue = null | File;
@@ -19,7 +19,7 @@ class FileField extends BaseField<FileInput, ComponentProps, ComponentState> {
   constructor(
     name: string,
     key: string,
-    getFormValidation: () => InputValidator<(key: string) => void | null | BaseInput<any, any>>,
+    getFormValidation: () => InputValidatorContract<(key: string) => void | null | BaseInput<any, any>>,
     validations: FieldValidation[],
     getRerender: () => (force: boolean) => void,
     value: FileInput

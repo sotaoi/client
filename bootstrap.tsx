@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import { StoreCreator } from '@sotaoi/contracts/definitions/redux';
 import { StoreContract } from '@sotaoi/contracts/http/store-contract';
-import { LocalMemory } from '@sotaoi/contracts/http/local-memory-contract';
+import { LocalMemoryContract } from '@sotaoi/contracts/http/local-memory-contract';
 import { SocketContract } from '@sotaoi/contracts/http/socket-contract';
 import { StoreService } from '@sotaoi/client/services/store-service';
 import { SocketService } from '@sotaoi/client/services/socket-service';
@@ -15,17 +15,20 @@ import { AppInfoInterface } from '@sotaoi/contracts/state';
 import { lang } from '@sotaoi/client/lang';
 import { LocalMemoryService } from '@sotaoi/client/services/local-memory-service';
 import { InputValidatorService } from '@sotaoi/forms/input-validator-service';
-import { Logger } from '@sotaoi/contracts/http/logger-contract';
+import { LoggerContract } from '@sotaoi/contracts/http/logger-contract';
 import { LoggerService } from '@sotaoi/client/services/logger-service';
-import { Lang } from '@sotaoi/contracts/http/lang-contract';
+import { LangContract } from '@sotaoi/contracts/http/lang-contract';
 import { LangService } from '@sotaoi/client/services/lang-service';
-import { InputValidator } from '@sotaoi/contracts/http/input-validator-contract';
-import { Notification } from '@sotaoi/contracts/http/notification-contract';
+import { InputValidatorContract } from '@sotaoi/contracts/http/input-validator-contract';
+import { NotificationContract } from '@sotaoi/contracts/http/notification-contract';
 import { NotificationService } from '@sotaoi/client/services/notification-service';
 import { pushRoute } from '@sotaoi/client/router';
 import { BaseForm } from '@sotaoi/client/forms/form-classes/base-form';
 import { getPackage, setPackage } from '@sotaoi/client/mpackages';
 import { AssetService } from '@sotaoi/client/services/asset-service';
+import { ActionService } from './services/action-service';
+import { ActionContract } from '@sotaoi/contracts/http/action-contract';
+import { ControlPanelContract } from '@sotaoi/contracts/http/control-panel-contract';
 
 class Bootstrap {
   public static async init(
@@ -46,6 +49,12 @@ class Bootstrap {
     BaseForm.NOTIFY = formNotifications;
 
     appKernel.bootstrap((app) => {
+      // Action
+      !app().has('app.system.action') &&
+        app().singleton<ActionContract>('app.system.action', (): ActionService => {
+          return new ActionService();
+        });
+
       // Input Validator
       !app().has('app.system.inputValidator') &&
         // @ts-ignore
@@ -59,21 +68,21 @@ class Bootstrap {
 
       // Local Memory
       !app().has('app.system.localMemory') &&
-        app().singleton<LocalMemory>('app.system.localMemory', (): LocalMemoryService => {
+        app().singleton<LocalMemoryContract>('app.system.localMemory', (): LocalMemoryService => {
           return new LocalMemoryService(['authRecord', 'currentPath'], getPackage('asyncStorage'));
         });
 
       // Logger
       !app().has('app.system.logger') &&
-        app().singleton<Logger>('app.system.logger', (): LoggerService => {
+        app().singleton<LoggerContract>('app.system.logger', (): LoggerService => {
           return new LoggerService();
         });
 
       // Store
       !app().has('app.system.store') &&
         app().singleton<StoreContract>('app.system.store', (): StoreService => {
-          const inputValidator = app().get<InputValidator>('app.system.inputValidator');
-          const localMemory = app().get<LocalMemory>('app.system.localMemory');
+          const inputValidator = app().get<InputValidatorContract>('app.system.inputValidator');
+          const localMemory = app().get<LocalMemoryContract>('app.system.localMemory');
           return new StoreService(appInfo, apiUrl, createStore, inputValidator, localMemory);
         });
 
@@ -85,19 +94,19 @@ class Bootstrap {
 
       // Lang
       !app().has('app.system.lang') &&
-        app().singleton<Lang>('app.system.lang', (): LangService => {
+        app().singleton<LangContract>('app.system.lang', (): LangService => {
           return new LangService();
         });
 
       // Notification
       !app().has('app.system.notification') &&
-        app().singleton<Notification>('app.system.notification', (): NotificationService => {
+        app().singleton<NotificationContract>('app.system.notification', (): NotificationService => {
           return new NotificationService(pushRoute);
         });
 
       // Control Panel
       !app().has('app.system.controlPanel') &&
-        app().singleton<ControlPanelService>('app.system.controlPanel', (): ControlPanelService => {
+        app().singleton<ControlPanelContract>('app.system.controlPanel', (): ControlPanelService => {
           return new ControlPanelService();
         });
 

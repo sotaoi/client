@@ -1,11 +1,11 @@
 import chalk from 'chalk';
-import { Logger } from '@sotaoi/contracts/http/logger-contract';
+import { LoggerContract } from '@sotaoi/contracts/http/logger-contract';
 
 const log = console.log;
 const warn = console.warn;
 const error = console.error;
 
-class LoggerService extends Logger {
+class LoggerService extends LoggerContract {
   public notice(...textArr: any[]): void {
     let header = new Date().toISOString().substr(0, 19).replace('T', ' ');
     header = `[${header}] NOTICE:`;

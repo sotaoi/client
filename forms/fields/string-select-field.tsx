@@ -2,7 +2,7 @@ import React from 'react';
 import { BaseField, FieldInit } from '@sotaoi/client/forms/fields/base-field';
 import { FieldValidation, BaseInput } from '@sotaoi/input/base-input';
 import { StringSelectInput, StringSelectValue } from '@sotaoi/input/string-select-input';
-import { InputValidator } from '@sotaoi/contracts/http/input-validator-contract';
+import { InputValidatorContract } from '@sotaoi/contracts/http/input-validator-contract';
 import { Helper } from '@sotaoi/client/helper';
 // import { Picker } from 'react-native-picker/picker';
 
@@ -23,7 +23,7 @@ class StringSelectField extends BaseField<StringSelectInput, ComponentProps, Com
   constructor(
     name: string,
     key: string,
-    getFormValidation: () => InputValidator<(key: string) => void | null | BaseInput<any, any>>,
+    getFormValidation: () => InputValidatorContract<(key: string) => void | null | BaseInput<any, any>>,
     validations: FieldValidation[] = [],
     getRerender: () => (force: boolean) => void,
     value: StringSelectInput

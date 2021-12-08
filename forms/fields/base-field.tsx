@@ -1,6 +1,6 @@
 import React from 'react';
 import { Helper } from '@sotaoi/client/helper';
-import { InputValidator } from '@sotaoi/contracts/http/input-validator-contract';
+import { InputValidatorContract } from '@sotaoi/contracts/http/input-validator-contract';
 import { BaseInput, FieldValidation } from '@sotaoi/input/base-input';
 import type { CollectionField as CollectionFieldType } from '@sotaoi/client/forms/fields/collection-field';
 
@@ -42,7 +42,7 @@ abstract class BaseField<ValueType, ComponentProps = any, ComponentState = any> 
   public renderUuid: string;
   public name: string;
   public readonly key: string;
-  public getFormValidation: () => InputValidator<(key: string) => void | null | BaseInput<any, any>>;
+  public getFormValidation: () => InputValidatorContract<(key: string) => void | null | BaseInput<any, any>>;
   public validations: null | FieldValidation[];
   public rerender: (force?: boolean) => void;
   public value: ValueType;
@@ -57,7 +57,7 @@ abstract class BaseField<ValueType, ComponentProps = any, ComponentState = any> 
   constructor(
     name: string,
     key: string,
-    getFormValidation: () => InputValidator<(key: string) => void | null | BaseInput<any, any>>,
+    getFormValidation: () => InputValidatorContract<(key: string) => void | null | BaseInput<any, any>>,
     validations: null | FieldValidation[],
     getRerender: () => (force: boolean) => void,
     value: ValueType

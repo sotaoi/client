@@ -2,7 +2,7 @@ import React from 'react';
 import { BaseField, FieldInit } from '@sotaoi/client/forms/fields/base-field';
 import { FieldValidation, BaseInput } from '@sotaoi/input/base-input';
 import { NumberInput } from '@sotaoi/input/number-input';
-import { InputValidator } from '@sotaoi/contracts/http/input-validator-contract';
+import { InputValidatorContract } from '@sotaoi/contracts/http/input-validator-contract';
 import { Helper } from '@sotaoi/client/helper';
 
 interface InputProps extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
@@ -17,7 +17,7 @@ class NumberField<ComponentProps = InputProps> extends BaseField<NumberInput, Co
   constructor(
     name: string,
     key: string,
-    getFormValidation: () => InputValidator<(key: string) => void | null | BaseInput<any, any>>,
+    getFormValidation: () => InputValidatorContract<(key: string) => void | null | BaseInput<any, any>>,
     validations: FieldValidation[],
     getRerender: () => (force: boolean) => void,
     value: NumberInput

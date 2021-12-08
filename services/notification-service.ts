@@ -7,10 +7,10 @@ import {
   SweetAlert2,
   ReactSweetAlert,
 } from '@sotaoi/contracts/definitions/notification-interface';
-import { Notification, PushRoute } from '@sotaoi/contracts/http/notification-contract';
+import { NotificationContract, PushRoute } from '@sotaoi/contracts/http/notification-contract';
 import { CommandResult, ActionConclusion, AuthResult, TaskResult } from '@sotaoi/contracts/transactions';
 
-class NotificationService extends Notification {
+class NotificationService extends NotificationContract {
   public swal: SweetAlert2 & ReactSweetAlert;
 
   constructor(pushRoute: PushRoute) {

@@ -3,7 +3,7 @@ import i18n, { Resource } from 'i18next';
 import { initReactI18next, useTranslation } from 'react-i18next';
 import { StoreContract } from '@sotaoi/contracts/http/store-contract';
 import { Lang } from '@sotaoi/contracts/state';
-import { Lang as LangContract } from '@sotaoi/contracts/http/lang-contract';
+import { LangContract } from '@sotaoi/contracts/http/lang-contract';
 
 class LangService extends LangContract {
   protected available: null | Lang[] = null;
