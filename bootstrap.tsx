@@ -30,7 +30,8 @@ import { SotaoiActionService } from '@sotaoi/client/services/action-service';
 import { ActionContract } from '@sotaoi/contracts/http/action-contract';
 import { ControlPanelContract } from '@sotaoi/contracts/http/control-panel-contract';
 import { OutputContract } from '@sotaoi/contracts/http/output-contract';
-import { OutputService } from './services/output-service';
+import { OutputService } from '@sotaoi/client/services/output-service';
+import { memory } from '@sotaoi/client/memory';
 
 class Bootstrap {
   public static async init(
@@ -90,8 +91,7 @@ class Bootstrap {
       !app().has('app.system.store') &&
         app().singleton<StoreContract>('app.system.store', (): StoreService => {
           const inputValidator = app().get<InputValidatorContract>('app.system.inputValidator');
-          const localMemory = app().get<LocalMemoryContract>('app.system.localMemory');
-          return new StoreService(appInfo, apiUrl, createStore, inputValidator, localMemory);
+          return new StoreService(appInfo, apiUrl, createStore, inputValidator, memory());
         });
 
       // Socket

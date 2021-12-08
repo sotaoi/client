@@ -7,6 +7,7 @@ import { LocalMemoryContract } from '@sotaoi/contracts/http/local-memory-contrac
 import { InputValidatorContract } from '@sotaoi/contracts/http/input-validator-contract';
 import { Navigation } from '@sotaoi/client/router/navigation';
 import { Helper } from '@sotaoi/client/helper';
+import { memory } from '@sotaoi/client/memory';
 
 let unsubscribe: () => void = () => undefined;
 
@@ -54,7 +55,14 @@ class StoreService extends StoreContract {
 
     const getSeed = async (): Promise<void> => {
       // seed = await(await fetch(`${this.apiUrl}/seed`, { method: 'GET' })).json();
-      seed = await (await fetch(`${this.apiUrl}/seed`, { method: 'GET' })).json();
+      seed = await (
+        await fetch(`${this.apiUrl}/seed`, {
+          method: 'GET',
+          headers: {
+            Authorization: this.getAccessToken() || (await memory().get('appAuthToken')) || '',
+          },
+        })
+      ).json();
     };
     while (!seed && getSeedTries < 15) {
       try {
@@ -189,7 +197,7 @@ class StoreService extends StoreContract {
   }
 
   public mdriverDomainSignature(): string {
-    // e.g.: *:com.qwertypnks.alarmion:mdriver:krs
+    // e.g.: *:com.kabayanremit.kbnremit:mdriver:krs
     return `*:${this.getAppInfo().bundleUid}:mdriver:${this.getAppInfo().signature1}`;
   }
 
