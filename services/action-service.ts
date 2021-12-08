@@ -1,7 +1,7 @@
 import { ActionContract } from '@sotaoi/contracts/http/action-contract';
 
-class ActionService extends ActionContract {
+class SotaoiActionService extends ActionContract {
   //
 }
 
-export { ActionService };
+export { SotaoiActionService };

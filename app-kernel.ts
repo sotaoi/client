@@ -6,9 +6,10 @@ let app: () => AppContainer = () => appContainer;
 class AppKernel {
   public bootstrapped: boolean;
 
-  constructor() {
+  constructor(kernelInit: null | ((app: () => AppContainer) => void) = null) {
     this.bootstrapped = false;
     appContainer = new AppContainer();
+    AppKernel.bootstrap(kernelInit);
     this.bootstrap();
   }
 
@@ -22,8 +23,8 @@ class AppKernel {
     }
   }
 
-  protected static bootstrap(): void {
-    //
+  protected static bootstrap(kernelInit: null | ((app: () => AppContainer) => void) = null): void {
+    kernelInit && kernelInit(app);
   }
 }
 

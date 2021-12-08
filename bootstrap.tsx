@@ -26,7 +26,7 @@ import { pushRoute } from '@sotaoi/client/router';
 import { BaseForm } from '@sotaoi/client/forms/form-classes/base-form';
 import { getPackage, setPackage } from '@sotaoi/client/mpackages';
 import { AssetService } from '@sotaoi/client/services/asset-service';
-import { ActionService } from './services/action-service';
+import { SotaoiActionService } from './services/action-service';
 import { ActionContract } from '@sotaoi/contracts/http/action-contract';
 import { ControlPanelContract } from '@sotaoi/contracts/http/control-panel-contract';
 
@@ -51,8 +51,8 @@ class Bootstrap {
     appKernel.bootstrap((app) => {
       // Action
       !app().has('app.system.action') &&
-        app().singleton<ActionContract>('app.system.action', (): ActionService => {
-          return new ActionService();
+        app().singleton<ActionContract>('app.system.action', (): SotaoiActionService => {
+          return new SotaoiActionService();
         });
 
       // Input Validator
