@@ -1,6 +1,5 @@
 import { SocketContract, SocketClass, SocketOptions } from '@sotaoi/contracts/http/socket-contract';
-// @ts-ignore
-import { io } from 'socket.io/client-dist/socket.io';
+const { io } = require('socket.io/client-dist/socket.io');
 
 class SocketService extends SocketContract {
   protected _io: null | SocketClass = null;

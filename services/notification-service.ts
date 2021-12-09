@@ -12,10 +12,12 @@ import { CommandResult, ActionConclusion, AuthResult, TaskResult } from '@sotaoi
 
 class NotificationService extends NotificationContract {
   public swal: SweetAlert2 & ReactSweetAlert;
+  public actionConclusion: typeof ActionConclusion;
 
-  constructor(pushRoute: PushRoute) {
+  constructor(pushRoute: PushRoute, actionConclusion: typeof ActionConclusion) {
     super(pushRoute);
     this.swal = withReactContent(Swal);
+    this.actionConclusion = actionConclusion;
   }
 
   public async fire<T = any>(options: SweetAlertOptions<T>): Promise<SweetAlertResult<Awaited<T>>> {
@@ -28,6 +30,11 @@ class NotificationService extends NotificationContract {
         icon: 'warning',
         title: result.title,
         text: result.msg,
+        toast: true,
+        position: 'bottom-right',
+        timer: 3000,
+        timerProgressBar: true,
+        showConfirmButton: false,
       });
     }
 
@@ -35,11 +42,16 @@ class NotificationService extends NotificationContract {
       icon: 'success',
       title: result.title,
       text: result.msg,
+      toast: true,
+      position: 'bottom-right',
+      timer: 3000,
+      timerProgressBar: true,
+      showConfirmButton: false,
     });
   }
 
   public conclusion<T = any>(result: CommandResult | AuthResult | TaskResult): ActionConclusion<T> {
-    return new ActionConclusion(result, this, this.pushRoute);
+    return new this.actionConclusion(result, this, this.pushRoute);
   }
 }
 

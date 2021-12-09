@@ -32,6 +32,7 @@ import { ControlPanelContract } from '@sotaoi/contracts/http/control-panel-contr
 import { OutputContract } from '@sotaoi/contracts/http/output-contract';
 import { OutputService } from '@sotaoi/client/services/output-service';
 import { memory } from '@sotaoi/client/memory';
+import { ActionConclusion } from '@sotaoi/contracts/transactions';
 
 class Bootstrap {
   public static async init(
@@ -66,8 +67,7 @@ class Bootstrap {
 
       // Input Validator
       !app().has('app.system.inputValidator') &&
-        // @ts-ignore
-        app().singleton<InputValidator>('app.system.inputValidator', (): InputValidatorService => {
+        app().singleton<InputValidatorContract>('app.system.inputValidator', (): InputValidatorService => {
           return new InputValidatorService(
             {},
             () => null,
@@ -109,7 +109,7 @@ class Bootstrap {
       // Notification
       !app().has('app.system.notification') &&
         app().singleton<NotificationContract>('app.system.notification', (): NotificationService => {
-          return new NotificationService(pushRoute);
+          return new NotificationService(pushRoute, ActionConclusion);
         });
 
       // Control Panel

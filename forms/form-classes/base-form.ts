@@ -95,7 +95,6 @@ abstract class BaseForm {
     this.strategy = null;
     this.task = null;
     this.fieldConstructors = fieldDescriptors.constructors;
-    // @ts-ignore
     this.fields = assignFields(this, '', this.fieldConstructors);
     this.formValidation = BaseForm.inputValidator.getFormValidation(
       (key: string) => _.get(this.getFields(), key)?.value || null
@@ -186,7 +185,6 @@ abstract class BaseForm {
   }): void => {
     this.serializedDescriptors = JSON.stringify(fieldDescriptors);
     this.fieldConstructors = fieldDescriptors.constructors;
-    // @ts-ignore
     this.fields = assignFields(this, '', this.fieldConstructors);
     this.validations = fieldDescriptors.validations;
   };
