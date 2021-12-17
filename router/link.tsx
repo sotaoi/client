@@ -4,7 +4,7 @@ import { RouteChange } from '@sotaoi/client/router/route-change';
 // import { Text } from 'react-native';
 // import { TouchableOpacity } from 'react-native-gesture-handler';
 
-interface LinkProps {
+interface LinkProps extends React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement> {
   children: any;
   to: string | ((ev: any) => Promise<void>);
   noGoTop?: boolean;
@@ -14,6 +14,7 @@ const Link: React.FunctionComponent<LinkProps> = (props: LinkProps) => {
     if (typeof props.to === 'function') {
       return (
         <a
+          {...props}
           onClick={(ev): boolean => {
             ev.preventDefault();
             typeof props.to === 'function' && props.to(ev);
@@ -26,6 +27,7 @@ const Link: React.FunctionComponent<LinkProps> = (props: LinkProps) => {
     }
     return (
       <a
+        {...props}
         href={props.to}
         onClick={(ev): boolean => {
           ev.preventDefault();
