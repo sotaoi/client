@@ -1,55 +1,36 @@
 {
-  "name": "@sotaoi/client",
+  "name": "@sotaoi/client-forms",
   "private": false,
-  "version": "1.1.6",
+  "version": "1.1.2",
   "description": "",
   "engines": {
     "node": "14.x"
   },
   "scripts": {
-    "build:sclient": "node ./console/commands/build/build-sclient",
-    "deploy:sclient": "node ./console/commands/deploy/deploy-sclient",
+    "build:sclientforms": "node ./console/commands/build/build-sclientforms",
+    "deploy:sclientforms": "node ./console/commands/deploy/deploy-sclientforms",
     "clean:bootstrap": "node ./console/commands/clean/clean-bootstrap",
-    "clean:sclient": "node ./console/commands/clean/clean-sclient"
+    "clean:sclientforms": "node ./console/commands/clean/clean-sclientforms"
   },
   "peerDependencies": {
+    "@sotaoi/client": "^1.1.6",
     "@sotaoi/config": "0.9.7",
-    "@sotaoi/client-forms": "^1.1.2",
-    "react": "16.13.1",
-    "react-dom": "16.13.1",
-    "react-native": "^0.63.4",
-    "redux": "^4.0.5"
+    "react": "16.13.1"
   },
   "devDependencies": {
+    "@sotaoi/client": "^1.1.6",
+    "@sotaoi/client-forms": "file:./",
     "@babel/runtime": "^7.8.4",
-    "@sotaoi/client": "file:./",
-    "@sotaoi/client-forms": "file:../sotaoi-client-forms",
-    "@sotaoi/contracts": "file:../sotaoi-contracts",
-    "@sotaoi/forms": "file:../sotaoi-forms",
-    "@sotaoi/input": "file:../sotaoi-input",
     "@sotaoi/signal": "1.0.5",
+    "@sotaoi/contracts": "file:../sotaoi-contracts",
+    "@sotaoi/input": "file:../sotaoi-input",
     "@types/lodash": "^4.14.171",
-    "@types/node": "^14",
-    "@types/react": "^16.9",
-    "@types/react-dom": "^16.9",
-    "@types/react-native": "^0.63.4",
-    "@types/react-redux": "^7.1.9",
-    "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "@types/react": "^16.9"
   },
   "dependencies": {
-    "@sotaoi/client": "file:./",
     "@sotaoi/contracts": "^1.0.4",
-    "@sotaoi/forms": "^1.0.4",
     "@sotaoi/input": "^1.0.4",
-    "@sotaoi/storage-driver": "1.1.8",
-    "chalk": "^4.1.0",
-    "i18next": "^20.2.1",
     "lodash": "^4.17.21",
-    "react-i18next": "^11",
-    "socket.io": "^3.1.1",
-    "sweetalert2": "^10.16.6",
-    "sweetalert2-react-content": "^3.3.2",
     "typescript": "4.1.5"
   }
 }
