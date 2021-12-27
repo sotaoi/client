@@ -18,6 +18,3 @@ Homestead.json
 Homestead.yaml
 
 #
-
-/deployment/*
-!/deployment/.gitkeep
