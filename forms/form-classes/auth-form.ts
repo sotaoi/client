@@ -2,7 +2,7 @@ import { CSSProperties } from 'react';
 import { getAuthFormComponent } from '@sotaoi/client/forms/form-components/auth-form-component';
 import { BaseForm } from '@sotaoi/client/forms/form-classes/base-form';
 import { Artifacts } from '@sotaoi/contracts/artifacts';
-import { FormConstructor } from '@sotaoi/client/forms';
+import { FormConstructor } from '@sotaoi/client/forms/form-factories';
 
 class AuthForm extends BaseForm {
   public FormComponent: React.FunctionComponent<{ children: any; formStyle?: CSSProperties; noFormElement?: boolean }>;

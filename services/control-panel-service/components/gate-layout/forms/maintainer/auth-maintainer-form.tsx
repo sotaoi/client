@@ -1,6 +1,6 @@
 import React from 'react';
 import { AuthForm } from '@sotaoi/client/forms/form-classes/auth-form';
-import { BaseField } from '@sotaoi/client/forms';
+import { BaseField } from '@sotaoi/client/forms/fields/base-field';
 
 interface FieldState {
   [key: string]: BaseField<any>;

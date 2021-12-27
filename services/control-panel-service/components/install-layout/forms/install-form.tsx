@@ -73,7 +73,7 @@ export { InstallForm };
 
 // import React from 'react';
 // import { StoreForm } from '@sotaoi/client/forms/form-classes/store-form';
-// import { BaseField } from '@sotaoi/client/forms';
+// import { BaseField } from '@sotaoi/client/forms/fields/base-field';
 // import { FileField } from '@sotaoi/client/forms/fields/file-field';
 
 // interface FieldState {

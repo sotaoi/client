@@ -2,7 +2,7 @@ import { CSSProperties } from 'react';
 import { getStoreFormComponent } from '@sotaoi/client/forms/form-components/store-form-component';
 import { AuthRecord, Artifacts } from '@sotaoi/contracts/artifacts';
 import { BaseForm } from '@sotaoi/client/forms/form-classes/base-form';
-import { FormConstructor } from '@sotaoi/client/forms';
+import { FormConstructor } from '@sotaoi/client/forms/form-factories';
 
 class StoreForm extends BaseForm {
   public FormComponent: React.FunctionComponent<{ children: any; formStyle?: CSSProperties; noFormElement?: boolean }>;

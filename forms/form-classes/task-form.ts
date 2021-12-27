@@ -2,7 +2,7 @@ import { CSSProperties } from 'react';
 import { getTaskFormComponent } from '@sotaoi/client/forms/form-components/task-form-component';
 import { BaseForm } from '@sotaoi/client/forms/form-classes/base-form';
 import { Artifacts, AuthRecord } from '@sotaoi/contracts/artifacts';
-import { FormConstructor } from '@sotaoi/client/forms';
+import { FormConstructor } from '@sotaoi/client/forms/form-factories';
 
 class TaskForm extends BaseForm {
   public FormComponent: React.FunctionComponent<{ children: any; formStyle?: CSSProperties; noFormElement?: boolean }>;

@@ -242,5 +242,3 @@ const FormConstructor = (init: { [key: string]: any }, validations: FormValidati
 };
 
 export { StoreFormFactory, UpdateFormFactory, AuthFormFactory, TaskFormFactory, FormConstructor };
-export { BaseField } from '@sotaoi/client/forms/fields/base-field';
-export { SingleCollectionField, CollectionField } from '@sotaoi/client/forms/fields/collection-field';
