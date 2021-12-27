@@ -2,7 +2,7 @@ import { StoreContract } from '@sotaoi/contracts/http/store-contract';
 import { Lang, State, Seed, AppInfoInterface } from '@sotaoi/contracts/state';
 import { AuthRecord } from '@sotaoi/contracts/artifacts';
 import { StoreCreator } from '@sotaoi/contracts/definitions/redux';
-import { BaseForm } from '@sotaoi/client/forms/form-classes/base-form';
+import { BaseForm } from '@sotaoi/client-forms/form-classes/base-form';
 import { LocalMemoryContract } from '@sotaoi/contracts/http/local-memory-contract';
 import { InputValidatorContract } from '@sotaoi/contracts/http/input-validator-contract';
 import { Navigation } from '@sotaoi/client/router/navigation';

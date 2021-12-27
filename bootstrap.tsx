@@ -23,7 +23,7 @@ import { InputValidatorContract } from '@sotaoi/contracts/http/input-validator-c
 import { NotificationContract } from '@sotaoi/contracts/http/notification-contract';
 import { NotificationService } from '@sotaoi/client/services/notification-service';
 import { pushRoute } from '@sotaoi/client/router';
-import { BaseForm } from '@sotaoi/client/forms/form-classes/base-form';
+import { BaseForm } from '@sotaoi/client-forms/form-classes/base-form';
 import { getPackage, setPackage } from '@sotaoi/client/mpackages';
 import { AssetService } from '@sotaoi/client/services/asset-service';
 import { SotaoiActionService } from '@sotaoi/client/services/action-service';
@@ -35,7 +35,11 @@ import { memory } from '@sotaoi/client/memory';
 import { ActionConclusion } from '@sotaoi/contracts/transactions';
 
 class Bootstrap {
-  public static async init(
+  protected static renderAppRoutine = async (): Promise<void> => {
+    //
+  };
+
+  protected static async prepare(
     appInfo: AppInfoInterface,
     apiUrl: string,
     appKernel: AppKernel,
@@ -44,14 +48,28 @@ class Bootstrap {
     Loading: React.FunctionComponent,
     ErrorComponent: React.FunctionComponent<{ error: Error }>,
     formNotifications: boolean,
-    mpackages: { [key: string]: any }
+    mpackages: { [key: string]: any },
+    xdata: { [key: string]: any }
   ): Promise<void> {
     Object.entries(mpackages).map(([name, pkg]) => {
       setPackage(name, pkg);
     });
 
     BaseForm.NOTIFY = formNotifications;
+  }
 
+  protected static async load(
+    appInfo: AppInfoInterface,
+    apiUrl: string,
+    appKernel: AppKernel,
+    routerComponentFn: () => React.ReactElement,
+    createStore: StoreCreator,
+    Loading: React.FunctionComponent,
+    ErrorComponent: React.FunctionComponent<{ error: Error }>,
+    formNotifications: boolean,
+    mpackages: { [key: string]: any },
+    xdata: { [key: string]: any }
+  ): Promise<void> {
     appKernel.bootstrap((app) => {
       // Output
       !app().has('app.system.output') &&
@@ -124,22 +142,61 @@ class Bootstrap {
           return new AssetService(appInfo.assetServiceUrl, appInfo.bundleName, appInfo.bundleName, true);
         });
     });
+  }
 
+  protected static async config(
+    appInfo: AppInfoInterface,
+    apiUrl: string,
+    appKernel: AppKernel,
+    routerComponentFn: () => React.ReactElement,
+    createStore: StoreCreator,
+    Loading: React.FunctionComponent,
+    ErrorComponent: React.FunctionComponent<{ error: Error }>,
+    formNotifications: boolean,
+    mpackages: { [key: string]: any },
+    xdata: { [key: string]: any }
+  ): Promise<void> {
     Helper.setTitle(appInfo.name);
+  }
 
-    const init = async (): Promise<void> => {
+  protected static async setup(
+    appInfo: AppInfoInterface,
+    apiUrl: string,
+    appKernel: AppKernel,
+    routerComponentFn: () => React.ReactElement,
+    createStore: StoreCreator,
+    Loading: React.FunctionComponent,
+    ErrorComponent: React.FunctionComponent<{ error: Error }>,
+    formNotifications: boolean,
+    mpackages: { [key: string]: any },
+    xdata: { [key: string]: any }
+  ): Promise<void> {
+    this.renderAppRoutine = async (): Promise<void> => {
       // socket().connect(`https://${appInfo.streamingDomain}:${appInfo.streamingPort}`, {
       //   transports: ['websocket'],
       // });
       await store().init();
       await lang().init(store);
     };
+  }
 
+  protected static async render(
+    appInfo: AppInfoInterface,
+    apiUrl: string,
+    appKernel: AppKernel,
+    routerComponentFn: () => React.ReactElement,
+    createStore: StoreCreator,
+    Loading: React.FunctionComponent,
+    ErrorComponent: React.FunctionComponent<{ error: Error }>,
+    formNotifications: boolean,
+    mpackages: { [key: string]: any },
+    xdata: { [key: string]: any }
+  ): Promise<void> {
     switch (true) {
       case Helper.isWeb():
         try {
           ReactDom.render(<Loading />, document.getElementById('bootstrap'));
-          await init();
+          await this.renderAppRoutine();
           if (!!store().getState()['app.coreState.maintenance']) {
             ReactDom.render(
               <div style={{ display: 'flex', flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -156,16 +213,93 @@ class Bootstrap {
         }
         break;
       case Helper.isMobile():
-        await init();
+        await this.renderAppRoutine();
         break;
       case Helper.isElectron():
         // no loader here yet
-        await init();
+        await this.renderAppRoutine();
         // nothing here yet
         break;
       default:
         throw new Error('Unknown environment');
     }
+  }
+
+  public static async init(
+    appInfo: AppInfoInterface,
+    apiUrl: string,
+    appKernel: AppKernel,
+    routerComponentFn: () => React.ReactElement,
+    createStore: StoreCreator,
+    Loading: React.FunctionComponent,
+    ErrorComponent: React.FunctionComponent<{ error: Error }>,
+    formNotifications: boolean,
+    mpackages: { [key: string]: any }
+  ): Promise<void> {
+    await this.prepare(
+      appInfo,
+      apiUrl,
+      appKernel,
+      routerComponentFn,
+      createStore,
+      Loading,
+      ErrorComponent,
+      formNotifications,
+      mpackages,
+      {}
+    );
+
+    await this.load(
+      appInfo,
+      apiUrl,
+      appKernel,
+      routerComponentFn,
+      createStore,
+      Loading,
+      ErrorComponent,
+      formNotifications,
+      mpackages,
+      {}
+    );
+
+    await this.config(
+      appInfo,
+      apiUrl,
+      appKernel,
+      routerComponentFn,
+      createStore,
+      Loading,
+      ErrorComponent,
+      formNotifications,
+      mpackages,
+      {}
+    );
+
+    await this.setup(
+      appInfo,
+      apiUrl,
+      appKernel,
+      routerComponentFn,
+      createStore,
+      Loading,
+      ErrorComponent,
+      formNotifications,
+      mpackages,
+      {}
+    );
+
+    await this.render(
+      appInfo,
+      apiUrl,
+      appKernel,
+      routerComponentFn,
+      createStore,
+      Loading,
+      ErrorComponent,
+      formNotifications,
+      mpackages,
+      {}
+    );
   }
 }
 

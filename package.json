@@ -1,7 +1,7 @@
 {
   "name": "@sotaoi/client",
   "private": false,
-  "version": "1.1.0",
+  "version": "1.1.2",
   "description": "",
   "engines": {
     "node": "14.x"
@@ -14,6 +14,7 @@
   },
   "peerDependencies": {
     "@sotaoi/config": "0.9.7",
+    "@sotaoi/client-forms": "^1.1.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "^0.63.4",
@@ -22,6 +23,7 @@
   "devDependencies": {
     "@babel/runtime": "^7.8.4",
     "@sotaoi/signal": "1.0.5",
+    "@sotaoi/client-forms": "file:../sotaoi-client-forms",
     "@sotaoi/contracts": "file:../sotaoi-contracts",
     "@sotaoi/forms": "file:../sotaoi-forms",
     "@sotaoi/input": "file:../sotaoi-input",

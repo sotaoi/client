@@ -1,10 +1,10 @@
 import React from 'react';
 import { ViewComponent, ViewData, ViewPromises } from '@sotaoi/client/components';
-import { AuthFormFactory, FormConstructor } from '@sotaoi/client/forms/form-factories';
+import { AuthFormFactory, FormConstructor } from '@sotaoi/client-forms/form-factories';
 import { Artifacts } from '@sotaoi/contracts/artifacts';
-import { AuthForm } from '@sotaoi/client/forms/form-classes/auth-form';
+import { AuthForm } from '@sotaoi/client-forms/form-classes/auth-form';
 import { AuthMaintainerForm } from '@sotaoi/client/services/control-panel-service/components/gate-layout/forms/maintainer/auth-maintainer-form';
-import { InputField } from '@sotaoi/client/forms/fields/input-field';
+import { InputField } from '@sotaoi/client-forms/fields/input-field';
 import { getMaintainerFormValidations } from '@sotaoi/client/services/control-panel-service/queries/validation-queries';
 
 interface AuthMaintainerViewProps {}
