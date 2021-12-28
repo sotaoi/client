@@ -33,6 +33,8 @@ import { OutputContract } from '@sotaoi/contracts/http/output-contract';
 import { OutputService } from '@sotaoi/client/services/output-service';
 import { memory } from '@sotaoi/client/memory';
 import { ActionConclusion } from '@sotaoi/contracts/transactions';
+import { SettingsService } from '@sotaoi/client/services/settings-service';
+import { settings } from '@sotaoi/client/settings';
 
 class BootstrapOptions {
   public disableSocket: boolean;
@@ -81,6 +83,12 @@ class Bootstrap {
     xdata: { [key: string]: any }
   ): Promise<void> {
     appKernel.bootstrap((app) => {
+      // Settings
+      !app().has('app.system.settings') &&
+        app().singleton<SettingsService>('app.system.settings', (): SettingsService => {
+          return new SettingsService(this.options());
+        });
+
       // Output
       !app().has('app.system.output') &&
         app().singleton<OutputContract>('app.system.output', (): OutputService => {
@@ -182,7 +190,7 @@ class Bootstrap {
     xdata: { [key: string]: any }
   ): Promise<void> {
     this.renderAppRoutine = async (): Promise<void> => {
-      !this.options().disableSocket &&
+      !settings().bootstrapOptions.disableSocket &&
         socket().connect(`https://${appInfo.streamingDomain}:${appInfo.streamingPort}`, {
           transports: ['websocket'],
         });

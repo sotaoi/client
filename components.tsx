@@ -5,13 +5,13 @@ import { State } from '@sotaoi/contracts/state';
 import { Helper } from '@sotaoi/client/helper';
 import { store } from '@sotaoi/client/store';
 import { Action, Dispatch } from 'redux';
-// import { ListenerEvent, ListenerEventType, RequestAbortHandlerAbstract } from '@sotaoi/contracts/transactions';
-import { RequestAbortHandlerAbstract } from '@sotaoi/contracts/transactions';
+import { ListenerEvent, ListenerEventType, RequestAbortHandlerAbstract } from '@sotaoi/contracts/transactions';
 import { RecordRef } from '@sotaoi/contracts/artifacts';
-// import { socket } from '@sotaoi/client/socket';
+import { socket } from '@sotaoi/client/socket';
 import { SocketListener } from '@sotaoi/contracts/http/socket-contract';
 import { pushRoute } from '@sotaoi/client/router';
 import { getPackage } from '@sotaoi/client/mpackages';
+import { settings } from '@sotaoi/client/settings';
 
 interface NoProps {}
 
@@ -376,8 +376,14 @@ abstract class ViewComponent<
             this.requestAbortHandler.clear();
           });
       };
-      // socket().io().on(ListenerEvent(ListenerEventType.DB.Records.UPDATED, recordRef), listener);
-      // socket().io().on(ListenerEvent(ListenerEventType.DB.Records.REMOVED, recordRef), listener);
+      try {
+        !settings().bootstrapOptions.disableSocket &&
+          socket().io().on(ListenerEvent(ListenerEventType.DB.Records.UPDATED, recordRef), listener);
+        !settings().bootstrapOptions.disableSocket &&
+          socket().io().on(ListenerEvent(ListenerEventType.DB.Records.REMOVED, recordRef), listener);
+      } catch (err) {
+        console.warn(err);
+      }
       this.refreshListeners[recordRef.serialize()] = listener;
     });
   }
@@ -386,14 +392,20 @@ abstract class ViewComponent<
     if (!Object.keys(this.refreshListeners).length) {
       return;
     }
-    // Object.entries(this.refreshListeners).map(([key, listener]) => {
-    //   socket()
-    //     .io()
-    //     .off(ListenerEvent(ListenerEventType.DB.Records.UPDATED, RecordRef.deserialize(key)), listener);
-    //   socket()
-    //     .io()
-    //     .off(ListenerEvent(ListenerEventType.DB.Records.REMOVED, RecordRef.deserialize(key)), listener);
-    // });
+    Object.entries(this.refreshListeners).map(([key, listener]) => {
+      try {
+        !settings().bootstrapOptions.disableSocket &&
+          socket()
+            .io()
+            .off(ListenerEvent(ListenerEventType.DB.Records.UPDATED, RecordRef.deserialize(key)), listener);
+        !settings().bootstrapOptions.disableSocket &&
+          socket()
+            .io()
+            .off(ListenerEvent(ListenerEventType.DB.Records.REMOVED, RecordRef.deserialize(key)), listener);
+      } catch (err) {
+        console.warn(err);
+      }
+    });
   }
 }
 
