@@ -11,7 +11,7 @@ import { Helper } from '@sotaoi/client/helper';
 import { AppKernel } from '@sotaoi/client/app-kernel';
 import { store } from '@sotaoi/client/store';
 import { AppInfoInterface } from '@sotaoi/contracts/state';
-// import { socket } from '@sotaoi/client/socket';
+import { socket } from '@sotaoi/client/socket';
 import { lang } from '@sotaoi/client/lang';
 import { LocalMemoryService } from '@sotaoi/client/services/local-memory-service';
 import { InputValidatorService } from '@sotaoi/forms/input-validator-service';
@@ -34,10 +34,20 @@ import { OutputService } from '@sotaoi/client/services/output-service';
 import { memory } from '@sotaoi/client/memory';
 import { ActionConclusion } from '@sotaoi/contracts/transactions';
 
+class BootstrapOptions {
+  public disableSocket: boolean;
+  constructor(disableSocket: boolean) {
+    this.disableSocket = disableSocket;
+  }
+}
 class Bootstrap {
   protected static renderAppRoutine = async (): Promise<void> => {
     //
   };
+
+  protected static options(): BootstrapOptions {
+    return new BootstrapOptions(false);
+  }
 
   protected static async prepare(
     appInfo: AppInfoInterface,
@@ -172,9 +182,10 @@ class Bootstrap {
     xdata: { [key: string]: any }
   ): Promise<void> {
     this.renderAppRoutine = async (): Promise<void> => {
-      // socket().connect(`https://${appInfo.streamingDomain}:${appInfo.streamingPort}`, {
-      //   transports: ['websocket'],
-      // });
+      !this.options().disableSocket &&
+        socket().connect(`https://${appInfo.streamingDomain}:${appInfo.streamingPort}`, {
+          transports: ['websocket'],
+        });
       await store().init();
       await lang().init(store);
     };
@@ -303,4 +314,4 @@ class Bootstrap {
   }
 }
 
-export { Bootstrap };
+export { Bootstrap, BootstrapOptions };
